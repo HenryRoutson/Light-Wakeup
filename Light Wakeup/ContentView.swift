@@ -8,18 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var OnOff = true
+    @State private var WakeupTime = Date()
+    
     var body: some View {
         
         VStack {
-            Text("Make sure to have a backup alarm set")
-                .foregroundColor(.gray)
             Spacer()
-            DatePicker("Select a wakeup time:", selection: .constant(Date()), displayedComponents: [.hourAndMinute])
-                .padding(.all, 30.0)
-            Toggle(isOn: .constant(true)) {
+            DatePicker("Select a wakeup time:",
+                       selection: $WakeupTime,
+                       displayedComponents: [.hourAndMinute])
+                .padding(.all, 40.0)
+            Toggle(isOn: $OnOff) {
                 Text("On / Off")
             }
-            .padding(.horizontal, 90.0)
+            .padding(.horizontal, 120.0)
             .padding(.vertical, 70.0)
             Link("Support the the developer",
                  destination: URL(string: "https://www.example.com/TOS.html")!)
