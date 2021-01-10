@@ -6,33 +6,78 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct ContentView: View {
     
-    @State private var OnOff = true
+    @State private var OnOff = false
     @State private var WakeupTime = Date()
+    
+    // set notification permission
+    init() {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+                if granted == true && error == nil {
+                    print("Notifications permitted")
+                } else {
+                    print("Notifications not permitted")
+                }
+            }
+        }
+    
+    func WakeupNotifications() {
+        print("wakeup not call")
+        print(Date())
+        print(Calendar.current.dateComponents([.hour, .minute], from: WakeupTime))
+        print(WakeupTime)
+            
+        if OnOff {
+        let content = UNMutableNotificationContent()
+        content.title = NSString.localizedUserNotificationString(forKey: "Your flashlight should be flashing", arguments: nil)
+        content.body = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: WakeupTime), repeats: true)
+        let request = UNNotificationRequest(identifier: "Notif", content: content, trigger: trigger) // Schedule the notification.
+        let center = UNUserNotificationCenter.current()
+        center.add(request) { (error : Error?) in
+             if let _ = error {}
+            }
+        }
+    }
     
     var body: some View {
         
         VStack {
+            
             Spacer()
+            
             DatePicker("Select a wakeup time:",
                        selection: $WakeupTime,
                        displayedComponents: [.hourAndMinute])
-                .padding(.all, 40.0)
-            Toggle(isOn: $OnOff) {
-                Text("On / Off")
-            }
-            .padding(.horizontal, 120.0)
-            .padding(.vertical, 70.0)
-            Link("Support the the developer",
-                 destination: URL(string: "https://www.example.com/TOS.html")!)
-                .padding(.bottom)
-                .padding(.top)
+                .padding([.top, .leading, .trailing], 40.0)
+                .padding(.bottom, 0.0)
+            
+            Button("Confirm time", action: WakeupNotifications)
+                .foregroundColor(.white)
+                .padding(.all)
+                .background(Color.black)
+                .cornerRadius(30)
+                .padding(.bottom, 50)
+                
+            
+            Toggle("Notification flash\n (if screen is off)", isOn: $OnOff)
+                .padding(.horizontal, 80.0)
+                .padding(.bottom, 100.0)
+            
+            // ADD apple pay to support developer
+
             Link("Feedback",
-                 destination: URL(string: "https://www.example.com/TOS.html")!)
-                .padding(.bottom)
-        }
+                 destination: URL(string: "mailto:yry1f6aq@anonaddy.me")!)
+                .foregroundColor(.white)
+                .padding(.all)
+                .background(Color.black)
+                .cornerRadius(30)
+                
+        } .padding(.vertical)
+        
     }
 }
 
