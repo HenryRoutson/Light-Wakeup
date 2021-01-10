@@ -15,7 +15,7 @@ struct ContentView: View {
     
     init() {
             // set notification permission
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
                 if granted == true && error == nil {
                     print("Notifications permitted")
                 } else {
@@ -28,9 +28,9 @@ struct ContentView: View {
             
         if OnOff {
             let content = UNMutableNotificationContent()
-            content.title = NSString.localizedUserNotificationString(forKey: "Your flashlight should be flashing", arguments: nil)
-            content.body = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
-            content.sound = nil
+            content.title = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
+            content.body = NSString.localizedUserNotificationString(forKey: "Click on a notification to stop more", arguments: nil)
+            content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.0) // make silent without importing new sounds
             let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: WakeupTime), repeats: true)
             let request = UNNotificationRequest(identifier: "Notif", content: content, trigger: trigger)
             let center = UNUserNotificationCenter.current()
