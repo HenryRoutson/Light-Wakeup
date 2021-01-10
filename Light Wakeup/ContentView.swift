@@ -13,33 +13,30 @@ struct ContentView: View {
     @State private var OnOff = false
     @State private var WakeupTime = Date()
     
-    // set notification permission
     init() {
+            // set notification permission
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
                 if granted == true && error == nil {
                     print("Notifications permitted")
                 } else {
                     print("Notifications not permitted")
-                }
-            }
+                }}
         }
     
     func WakeupNotifications() {
-        print("wakeup not call")
-        print(Date())
-        print(Calendar.current.dateComponents([.hour, .minute], from: WakeupTime))
-        print(WakeupTime)
+        print("WakeupNotifications")
             
         if OnOff {
-        let content = UNMutableNotificationContent()
-        content.title = NSString.localizedUserNotificationString(forKey: "Your flashlight should be flashing", arguments: nil)
-        content.body = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: WakeupTime), repeats: true)
-        let request = UNNotificationRequest(identifier: "Notif", content: content, trigger: trigger) // Schedule the notification.
-        let center = UNUserNotificationCenter.current()
-        center.add(request) { (error : Error?) in
-             if let _ = error {}
-            }
+            let content = UNMutableNotificationContent()
+            content.title = NSString.localizedUserNotificationString(forKey: "Your flashlight should be flashing", arguments: nil)
+            content.body = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
+            content.sound = nil
+            let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: WakeupTime), repeats: true)
+            let request = UNNotificationRequest(identifier: "Notif", content: content, trigger: trigger)
+            let center = UNUserNotificationCenter.current()
+            center.add(request) { (error : Error?) in
+                 if let _ = error { print("error:") }
+                }
         }
     }
     
