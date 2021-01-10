@@ -27,10 +27,13 @@ struct ContentView: View {
         print("WakeupNotifications")
             
         if OnOff {
+            //define notification
             let content = UNMutableNotificationContent()
             content.title = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
             content.body = NSString.localizedUserNotificationString(forKey: "Click on a notification to stop more", arguments: nil)
-            content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.0) // make silent without importing new sounds
+            content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.0) // make silent without importing new sounds, while still activating flash
+            
+            //send notification
             let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: WakeupTime), repeats: true)
             let request = UNNotificationRequest(identifier: "Notif", content: content, trigger: trigger)
             let center = UNUserNotificationCenter.current()
