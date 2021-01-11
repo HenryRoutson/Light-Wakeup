@@ -30,7 +30,7 @@ struct ContentView: View {
             //define notification
             let content = UNMutableNotificationContent()
             content.title = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
-            content.body = NSString.localizedUserNotificationString(forKey: "Click on a notification to stop more", arguments: nil)
+            content.body = NSString.localizedUserNotificationString(forKey: "Click on this notification to stop more", arguments: nil)
             content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.0) // make silent without importing new sounds, while still activating flash
             
             //send notification
