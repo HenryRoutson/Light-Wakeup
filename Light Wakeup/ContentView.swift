@@ -23,23 +23,33 @@ struct ContentView: View {
                 }}
         }
     
+    // add UNUserNotificationCenter.current().removeAllPendingNotificationRequests() for notification action
+    
     func WakeupNotifications() {
         print("WakeupNotifications")
             
         if OnOff {
+        
             //define notification
             let content = UNMutableNotificationContent()
             content.title = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
-            content.body = NSString.localizedUserNotificationString(forKey: "Click on this notification to stop more", arguments: nil)
-            content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.0) // make silent without importing new sounds, while still activating flash
+            content.body = NSString.localizedUserNotificationString(forKey: "Clear to stop", arguments: nil)
+            content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.01) // makes silent without importing new sounds, while still activating flash
             
-            //send notification
-            let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.hour, .minute], from: WakeupTime), repeats: true)
-            let request = UNNotificationRequest(identifier: "Notif", content: content, trigger: trigger)
-            let center = UNUserNotificationCenter.current()
-            center.add(request) { (error : Error?) in
-                 if let _ = error { print("error:") }
-                }
+            var NotificationTime = WakeupTime
+            for _ in 0...120 {
+                
+                //send notification
+                let dateMatching = Calendar.current.dateComponents([.hour, .minute, .second], from: NotificationTime)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: true)
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                UNUserNotificationCenter.current().add(request) { (error : Error?) in
+                     if let _ = error { print("error:") }
+                    }
+                
+                // add to time for next notification
+                NotificationTime = Date(timeInterval: 0.5, since: NotificationTime) // shorter time intervals can stop vibration
+            }
         }
     }
     
