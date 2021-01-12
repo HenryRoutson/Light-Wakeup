@@ -16,7 +16,8 @@ struct ContentView: View {
     init() {
             // ask for notification permission, if not already
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
-                if granted == true && error == nil { print("Notifications permitted") }}}
+                if granted == true && error == nil { print("Notifications permitted") }}
+    }
 
     func WakeupNotifications() {
         print("WakeupNotifications")
