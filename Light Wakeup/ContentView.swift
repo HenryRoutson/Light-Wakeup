@@ -22,12 +22,11 @@ struct ContentView: View {
                     print("Notifications not permitted")
                 }}
         }
-    
-    // add UNUserNotificationCenter.current().removeAllPendingNotificationRequests() for notification action
-    
+
     func WakeupNotifications() {
         print("WakeupNotifications")
-            
+        
+        // temp
         if OnOff {
         
             //define notification
@@ -36,6 +35,7 @@ struct ContentView: View {
             content.body = NSString.localizedUserNotificationString(forKey: "Clear to stop", arguments: nil)
             content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.01) // makes silent without importing new sounds, while still activating flash
             
+            // create loop to schedule sequential notifications
             var NotificationTime = WakeupTime
             for _ in 0...120 {
                 
@@ -43,9 +43,7 @@ struct ContentView: View {
                 let dateMatching = Calendar.current.dateComponents([.hour, .minute, .second], from: NotificationTime)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: true)
                 let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                UNUserNotificationCenter.current().add(request) { (error : Error?) in
-                     if let _ = error { print("error:") }
-                    }
+                UNUserNotificationCenter.current().add(request)
                 
                 // add to time for next notification
                 NotificationTime = Date(timeInterval: 0.5, since: NotificationTime) // shorter time intervals can stop vibration
