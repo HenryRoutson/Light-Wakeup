@@ -14,14 +14,9 @@ struct ContentView: View {
     @State private var WakeupTime = Date()
     
     init() {
-            // set notification permission
+            // ask for notification permission, if not already
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
-                if granted == true && error == nil {
-                    print("Notifications permitted")
-                } else {
-                    print("Notifications not permitted")
-                }}
-        }
+                if granted == true && error == nil { print("Notifications permitted") }}}
 
     func WakeupNotifications() {
         print("WakeupNotifications")
