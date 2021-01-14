@@ -14,13 +14,14 @@ struct ContentView: View {
     @State private var WakeupTime = Date()
     
     init() {
-            // ask for notification permission, if not already
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
-                if granted == true && error == nil { print("Notifications permitted") }}
+        print(#function)
+        // ask for notification permission, if not already
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
+            if granted == true && error == nil { print("Notifications permitted") }}
     }
 
     func WakeupNotifications() {
-        print("WakeupNotifications")
+        print(#function)
         
         // temp
         if OnOff {
@@ -45,6 +46,12 @@ struct ContentView: View {
                 NotificationTime = Date(timeInterval: 0.5, since: NotificationTime) // shorter time intervals can stop vibration
             }
         }
+    }
+    
+    func StopWakeupNotifications() {
+        print(#function)
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
     var body: some View {
@@ -81,7 +88,6 @@ struct ContentView: View {
                 .cornerRadius(30)
                 
         } .padding(.vertical)
-        
     }
 }
 
