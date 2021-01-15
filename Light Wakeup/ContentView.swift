@@ -91,8 +91,8 @@ struct ContentView: View {
                 .onChange(of: NotificationToggle) { x in
                     print("FILTER toggle")
                     if NotificationToggle {
-                        SetWakeupNotifications()
                         requestNotificationAuthorization()
+                        SetWakeupNotifications()
                     }
                     else {
                         StopWakeupNotifications()
