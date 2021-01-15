@@ -10,11 +10,15 @@ import UserNotifications
 
 struct ContentView: View {
     
-    @State private var OnOff = false
     @State private var WakeupTime = Date()
+    @State private var TimeMinDuration = 5
     
+    @State private var NotificationToggle = true
+    private let NotificationSecTimeInterval = 0.5
+
     init() {
         print(#function)
+        
         // ask for notification permission, if not already
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
             if granted == true && error == nil { print("Notifications permitted") }}
@@ -23,28 +27,24 @@ struct ContentView: View {
     func WakeupNotifications() {
         print(#function)
         
-        // temp
-        if OnOff {
+        //define notification
+        let content = UNMutableNotificationContent()
+        content.title = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
+        content.body = NSString.localizedUserNotificationString(forKey: "Clear to stop", arguments: nil)
+        content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.01) // makes silent without importing new sounds, while still activating flash
         
-            //define notification
-            let content = UNMutableNotificationContent()
-            content.title = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
-            content.body = NSString.localizedUserNotificationString(forKey: "Clear to stop", arguments: nil)
-            content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.01) // makes silent without importing new sounds, while still activating flash
+        // create loop to schedule sequential notifications
+        var NotificationTime = WakeupTime
+        for _ in 0...Int(TimeMinDuration*60) {
             
-            // create loop to schedule sequential notifications
-            var NotificationTime = WakeupTime
-            for _ in 0...120 {
-                
-                //send notification
-                let dateMatching = Calendar.current.dateComponents([.hour, .minute, .second], from: NotificationTime)
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: true)
-                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                UNUserNotificationCenter.current().add(request)
-                
-                // add to time for next notification
-                NotificationTime = Date(timeInterval: 0.5, since: NotificationTime) // shorter time intervals can stop vibration
-            }
+            //send notification
+            let dateMatching = Calendar.current.dateComponents([.hour, .minute, .second], from: NotificationTime)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: true)
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request)
+            
+            // add to time for next notification
+            NotificationTime = Date(timeInterval: NotificationSecTimeInterval, since: NotificationTime) // shorter time intervals can stop vibration
         }
     }
     
@@ -74,9 +74,18 @@ struct ContentView: View {
                 .padding(.bottom, 50)
                 
             
-            Toggle("Notification flash\n (if screen is off)", isOn: $OnOff)
+            Toggle("Notification flash\n (if screen is off)", isOn: $NotificationToggle)
                 .padding(.horizontal, 80.0)
                 .padding(.bottom, 100.0)
+                .onChange(of: NotificationToggle) { newValue in
+                    print("toggle")
+                    if NotificationToggle {
+                        WakeupNotifications()
+                    }
+                    else {
+                        StopWakeupNotifications()
+                    }
+                }
             
             // ADD apple pay to support developer
 
@@ -90,7 +99,6 @@ struct ContentView: View {
         } .padding(.vertical)
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
