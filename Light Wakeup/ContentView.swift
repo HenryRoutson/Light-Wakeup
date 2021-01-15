@@ -13,12 +13,12 @@ struct ContentView: View {
     @State private var WakeupTime = Date()
     @State private var TimeMinDuration = 5
     
-    @State private var NotificationToggle = true
+    @State private var NotificationToggle = false
     @State private var NotificationsSet = false // would be more efficient not to have to use this if you could set notification trigger conditions
     private let NotificationSecTimeInterval = 0.5
 
-    init() {
-        print("FILTER ",#function)
+    func requestNotificationAuthorization() {
+        print("FILTER",#function)
         
         // ask for notification permission, if not already
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
@@ -26,16 +26,22 @@ struct ContentView: View {
     }
 
     func SetWakeupNotifications() {
-        print("FILTER ",#function)
+        print("FILTER  ",#function, WakeupTime)
         
         // make sure notifications aren't double set
         if NotificationsSet == false && NotificationToggle == true {
+            print("FILTER     Passed conditions for", #function)
         
             //define notification
             let content = UNMutableNotificationContent()
             content.title = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
             content.body = NSString.localizedUserNotificationString(forKey: "", arguments: nil)
             content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.01) // makes silent without importing new sounds, while still activating flash
+            //add notification action
+            let Stop = UNNotificationAction(identifier: "stop", title: "stop")
+            let category = UNNotificationCategory(identifier: "Category", actions: [Stop], intentIdentifiers: [])
+            UNUserNotificationCenter.current().setNotificationCategories([category])
+            content.categoryIdentifier = "Category"
             
             // create loop to schedule sequential notifications
             var NotificationTime = WakeupTime
@@ -55,7 +61,7 @@ struct ContentView: View {
     }
     
     func StopWakeupNotifications() {
-        print("FILTER ",#function)
+        print("FILTER  ",#function)
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         NotificationsSet = false
@@ -79,13 +85,14 @@ struct ContentView: View {
                 }
                 
             
-            Toggle("Notification flash\n (if screen is off)", isOn: $NotificationToggle)
+            Toggle("Notification flash\n (if screen & Do Not Disturb is off)", isOn: $NotificationToggle)
                 .padding(.horizontal, 80.0)
                 .padding(.bottom, 100.0)
                 .onChange(of: NotificationToggle) { x in
                     print("FILTER toggle")
                     if NotificationToggle {
                         SetWakeupNotifications()
+                        requestNotificationAuthorization()
                     }
                     else {
                         StopWakeupNotifications()
