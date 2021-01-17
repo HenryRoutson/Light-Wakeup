@@ -17,11 +17,11 @@ struct ContentView: View {
     
     // Notification flash
     
-    @State private var NotificationToggle = false
+    @State private var NotificationToggle = true
     @State private var NotificationsSet = false // remove if possible
     let NotificationSecTimeInterval = 0.5 // double
 
-    func requestNotificationAuthorization() {
+    init() {
         print("FILTER",#function)
         
         // ask for notification permission, if not already
@@ -93,7 +93,6 @@ struct ContentView: View {
                 .onChange(of: NotificationToggle) { x in
                     print("FILTER toggle")
                     if NotificationToggle {
-                        requestNotificationAuthorization()
                         SetWakeupNotifications()
                     }
                     else {
