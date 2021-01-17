@@ -10,12 +10,16 @@ import UserNotifications
 
 struct ContentView: View {
     
+    // Universal
+    
     @State private var WakeupTime = Date()
-    @State private var TimeMinDuration = 5
+    let TimeMinDuration = 1.0 // double
+    
+    // Notification flash
     
     @State private var NotificationToggle = false
-    @State private var NotificationsSet = false // would be more efficient not to have to use this if you could set notification trigger conditions
-    private let NotificationSecTimeInterval = 0.5
+    @State private var NotificationsSet = false // remove if possible
+    let NotificationSecTimeInterval = 0.5 // double
 
     func requestNotificationAuthorization() {
         print("FILTER",#function)
@@ -35,20 +39,18 @@ struct ContentView: View {
             //define notification
             let content = UNMutableNotificationContent()
             content.title = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
-            content.body = NSString.localizedUserNotificationString(forKey: "", arguments: nil)
             content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.01) // makes silent without importing new sounds, while still activating flash
-            //add notification action
-            let Stop = UNNotificationAction(identifier: "stop", title: "stop")
-            let category = UNNotificationCategory(identifier: "Category", actions: [Stop], intentIdentifiers: [])
-            UNUserNotificationCenter.current().setNotificationCategories([category])
-            content.categoryIdentifier = "Category"
             
             // create loop to schedule sequential notifications
             var NotificationTime = WakeupTime
-            for _ in 0...Int(TimeMinDuration*60) {
+            let loops = Int(TimeMinDuration*60/NotificationSecTimeInterval)
+            print("FILTER \(loops)")
+            for n in 1...loops {
                 
                 //send notification
+                content.body = NSString.localizedUserNotificationString(forKey: "\(NotificationTime)  \(n)", arguments: nil)
                 let dateMatching = Calendar.current.dateComponents([.hour, .minute, .second], from: NotificationTime)
+
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: true)
                 let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
                 UNUserNotificationCenter.current().add(request)
@@ -56,6 +58,7 @@ struct ContentView: View {
                 // add to time for next notification
                 NotificationTime = Date(timeInterval: NotificationSecTimeInterval, since: NotificationTime) // shorter time intervals can stop vibration
                 }
+            print("FILTER     Final time:", NotificationTime)
             NotificationsSet = true
             }
     }
@@ -83,9 +86,8 @@ struct ContentView: View {
                     StopWakeupNotifications()
                     SetWakeupNotifications()
                 }
-                
             
-            Toggle("Notification flash\n (if screen & Do Not Disturb is off)", isOn: $NotificationToggle)
+            Toggle("Notification flash\n (if screen & Do Not Disturb is off)", isOn: $NotificationToggle) // user feedback is to make more understandable
                 .padding(.horizontal, 80.0)
                 .padding(.bottom, 100.0)
                 .onChange(of: NotificationToggle) { x in
@@ -99,6 +101,15 @@ struct ContentView: View {
                     }
                 }
             
+            Button("stop notifications") {
+                StopWakeupNotifications()
+                SetWakeupNotifications()
+            }
+            .foregroundColor(.white)
+            .padding(.all)
+            .background(Color.black)
+            .cornerRadius(30)
+            
             // ADD apple pay to support developer
 
             Link("Feedback",
@@ -107,8 +118,8 @@ struct ContentView: View {
                 .padding(.all)
                 .background(Color.black)
                 .cornerRadius(30)
-                
-        } .padding(.vertical)
+        }
+        .padding(.vertical)
     }
 }
 
