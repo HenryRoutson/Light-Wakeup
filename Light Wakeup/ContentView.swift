@@ -13,7 +13,7 @@ struct ContentView: View {
     // Universal
     
     @State private var WakeupTime = Date()
-    let TimeMinDuration = 1.0 // double
+    let TimeMinDuration = 0.5 // double, dont make a fraction
     
     // Notification flash
     
@@ -41,9 +41,9 @@ struct ContentView: View {
             content.title = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
             content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.01) // makes silent without importing new sounds, while still activating flash
             
-            // create loop to schedule sequential notifications
+            // create loop to schedule sequential notifications, note that at max 64 or 2^6 can be created and if more are only the latest are fired
             var NotificationTime = WakeupTime
-            let loops = Int(TimeMinDuration*60/NotificationSecTimeInterval)
+            let loops = Int(Double(TimeMinDuration*60)/NotificationSecTimeInterval)
             print("FILTER \(loops)")
             for n in 1...loops {
                 
@@ -60,7 +60,14 @@ struct ContentView: View {
                 }
             print("FILTER     Final time:", NotificationTime)
             NotificationsSet = true
+            
+            // schedule the clearing of notifications when user opens the app
+            let timer = Timer(fire: NotificationTime, interval: TimeMinDuration*60, repeats: true) { (_) in
+                print("FILTER Timer")
+                StopWakeupNotifications()
             }
+            RunLoop.main.add(timer, forMode: .common)
+        }
     }
     
     func StopWakeupNotifications() {
@@ -99,15 +106,6 @@ struct ContentView: View {
                         StopWakeupNotifications()
                     }
                 }
-            
-            Button("stop notifications") {
-                StopWakeupNotifications()
-                SetWakeupNotifications()
-            }
-            .foregroundColor(.white)
-            .padding(.all)
-            .background(Color.black)
-            .cornerRadius(30)
             
             // ADD apple pay to support developer
 
