@@ -12,7 +12,11 @@ struct ContentView: View {
     // Universal
     
     @State private var WakeupTime = Date()
+    @State private var useAlertShowing = false
     let TimeMinDuration = 0.5 // double, dont make a fraction
+    
+    
+    // Flashlight with app on - might include in a later update
     
     // Notification flash
     
@@ -79,10 +83,28 @@ struct ContentView: View {
         
         VStack {
             
-            Text("Make sure...\n\ndo not disturb will be off,\nyou turn your screen off and facedown,\nLED flash notifications are on,\nand you have a sound alarm as backup.")
+            Text("Setup")
+                .multilineTextAlignment(.center)
+                .padding([.top, .leading, .trailing])
+                .padding(.bottom, 3)
+        
+            Text("'LED flash for alerts' needs to be enabled\nand 'Do not disturb' needs to turn off before the set time")
                 .foregroundColor(Color.gray)
                 .multilineTextAlignment(.center)
-                .padding(.top)
+                .padding([.leading, .bottom, .trailing])
+            
+            // button to open settings
+            // settings URL is ideal but currently not working, IE prefs:root=
+            // https://www.macstories.net/ios/a-comprehensive-guide-to-all-120-settings-urls-supported-by-ios-and-ipados-13-1/
+            Button("Open settings") {
+                if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
+                }
+            }
+                .foregroundColor(.white)
+                .padding(.all)
+                .background(Color.black)
+                .cornerRadius(30)
             
             Spacer()
             
@@ -97,7 +119,7 @@ struct ContentView: View {
                     SetWakeupNotifications()
                 }
             
-            Toggle("On/Off", isOn: $NotificationToggle) // user feedback is to make more understandable
+            Toggle("On/Off", isOn: $NotificationToggle)
                 .padding(.horizontal, 80.0)
                 .padding(.bottom, 100.0)
                 .onChange(of: NotificationToggle) { x in
@@ -109,6 +131,17 @@ struct ContentView: View {
                         StopWakeupNotifications()
                     }
                 }
+            
+            Button("How to use") {
+                self.useAlertShowing = true
+            }
+            .alert(isPresented: $useAlertShowing) {
+                Alert(title: Text("How to use"), message: Text("After settings have been setup, make sure you have a sound alarm as backup and turn your screen off and facedown"), dismissButton: .default(Text("Okay")))
+            }
+                .foregroundColor(.white)
+                .padding(.all)
+                .background(Color.black)
+                .cornerRadius(30)
             
             Link("Feedback",
                  destination: URL(string: "mailto:yry1f6aq@anonaddy.me")!)
