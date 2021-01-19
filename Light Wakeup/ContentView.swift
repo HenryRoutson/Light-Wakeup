@@ -1,5 +1,3 @@
-//
-//  ContentView.swift
 //  Light Wakeup
 //
 //  Created by Henry on 5/1/21.
@@ -7,6 +5,7 @@
 
 import SwiftUI
 import UserNotifications
+import CoreData
 
 struct ContentView: View {
     
@@ -63,7 +62,6 @@ struct ContentView: View {
             
             // schedule the clearing of notifications when user opens the app
             let timer = Timer(fire: NotificationTime, interval: TimeMinDuration*60, repeats: true) { (_) in
-                print("FILTER Timer")
                 StopWakeupNotifications()
             }
             RunLoop.main.add(timer, forMode: .common)
@@ -81,20 +79,25 @@ struct ContentView: View {
         
         VStack {
             
+            Text("Make sure...\n\ndo not disturb will be off,\nyou turn your screen off and facedown,\nLED flash notifications are on,\nand you have a sound alarm as backup.")
+                .foregroundColor(Color.gray)
+                .multilineTextAlignment(.center)
+                .padding(.top)
+            
             Spacer()
             
             DatePicker("Select a wakeup time:",
                        selection: $WakeupTime,
                        displayedComponents: [.hourAndMinute])
                 .padding([.top, .leading, .trailing], 40.0)
-                .padding(.bottom, 0.0)
+                .padding(.bottom, 10.0)
                 .onChange(of: WakeupTime) { x in
                     print("FILTER datepicker")
                     StopWakeupNotifications()
                     SetWakeupNotifications()
                 }
             
-            Toggle("Notification flash\n (if screen & Do Not Disturb is off)", isOn: $NotificationToggle) // user feedback is to make more understandable
+            Toggle("On/Off", isOn: $NotificationToggle) // user feedback is to make more understandable
                 .padding(.horizontal, 80.0)
                 .padding(.bottom, 100.0)
                 .onChange(of: NotificationToggle) { x in
@@ -107,8 +110,6 @@ struct ContentView: View {
                     }
                 }
             
-            // ADD apple pay to support developer
-
             Link("Feedback",
                  destination: URL(string: "mailto:yry1f6aq@anonaddy.me")!)
                 .foregroundColor(.white)
