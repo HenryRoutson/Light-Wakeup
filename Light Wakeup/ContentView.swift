@@ -6,78 +6,104 @@
 import SwiftUI
 import UserNotifications
 import CoreData
+import BackgroundTasks
 
 struct ContentView: View {
     
     // Universal
-    
-    @State private var WakeupTime = Date()
+    @State var WakeupTime = Date()
     @State private var useAlertShowing = false
     let TimeMinDuration = 0.5 // double, dont make a fraction
     
-    
     // Flashlight with app on - might include in a later update
     
-    // Notification flash
-    
-    @State private var NotificationToggle = true
-    @State private var NotificationsSet = false // remove if possible
+    // Notification flash values
+    @State var NotificationToggle = true
     let NotificationSecTimeInterval = 0.5 // double
-
-    init() {
-        print("FILTER",#function)
+    
+    // Notification flash functions
         
-        // ask for notification permission, if not already
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
-            if granted == true && error == nil { print("FILTER Notifications permitted") }}
-    }
-
-    func SetWakeupNotifications() {
+    // send requests to send notifications that wake up the user
+    func SetWakeupNotifications(time: Date) {
         print("FILTER  ",#function, WakeupTime)
         
-        // make sure notifications aren't double set
-        if NotificationsSet == false && NotificationToggle == true {
-            print("FILTER     Passed conditions for", #function)
+        // remove old notifications
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         
-            //define notification
-            let content = UNMutableNotificationContent()
-            content.title = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
-            content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.01) // makes silent without importing new sounds, while still activating flash
+        //define notification
+        let content = UNMutableNotificationContent()
+        content.title = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
+        content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.0)
+        
+        // create loop to schedule sequential notifications
+        // Note that at max 64 or 2^6 can be created and if more are only the latest are fired
+        let loops = Int(Double(TimeMinDuration*60)/NotificationSecTimeInterval)
+        print("FILTER          \(loops) notifications")
+        var NotificationTime = Date(timeInterval: 5, since: time) // rather than wakeuptime as time is controlled by BGTask scheduler
+        for n in 1...loops {
             
-            // create loop to schedule sequential notifications, note that at max 64 or 2^6 can be created and if more are only the latest are fired
-            var NotificationTime = WakeupTime
-            let loops = Int(Double(TimeMinDuration*60)/NotificationSecTimeInterval)
-            print("FILTER \(loops)")
-            for n in 1...loops {
-                
-                //send notification
-                content.body = NSString.localizedUserNotificationString(forKey: "\(NotificationTime)  \(n)", arguments: nil)
-                let dateMatching = Calendar.current.dateComponents([.hour, .minute, .second], from: NotificationTime)
+            //send notification
+            content.body = NSString.localizedUserNotificationString(forKey: "\(NotificationTime)  \(n)", arguments: nil)
+            let dateMatching = Calendar.current.dateComponents([.hour, .minute, .second], from: NotificationTime)
 
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: true)
-                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                UNUserNotificationCenter.current().add(request)
-                
-                // add to time for next notification
-                NotificationTime = Date(timeInterval: NotificationSecTimeInterval, since: NotificationTime) // shorter time intervals can stop vibration
-                }
-            print("FILTER     Final time:", NotificationTime)
-            NotificationsSet = true
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: true)
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request)
             
-            // schedule the clearing of notifications when user opens the app
-            let timer = Timer(fire: NotificationTime, interval: TimeMinDuration*60, repeats: true) { (_) in
-                StopWakeupNotifications()
+            // add to time for next notification
+            // Note that shorter time intervals can stop vibration
+            NotificationTime = Date(timeInterval: NotificationSecTimeInterval, since: NotificationTime)
             }
-            RunLoop.main.add(timer, forMode: .common)
+        print("FILTER     Final time:", NotificationTime)
+    }
+    
+    
+    // Define background code to stop and set Notififcations and then reschedule itself
+    // run with:
+    // e -l objc -- (void)[[BGTaskScheduler sharedScheduler] _simulateLaunchForTaskWithIdentifier:@"HenryRoutson_identifier"]
+    func BackgroundNotificationRefresh(task: BGProcessingTask) {
+        print("FILTER BGTask running: \(Date()) ")
+        
+        // set notifications
+        SetWakeupNotifications(time: Date())
+        
+        // reschedule the function, to re-set notificiations
+        let request = BGProcessingTaskRequest(identifier: "HenryRoutson_identifier")
+        request.earliestBeginDate = Date().addingTimeInterval(TimeInterval(30.0))
+        do {
+            try BGTaskScheduler.shared.submit(request)
+            print("Filter \(#function) requested BG")
+        }
+        catch {
+            print("FILTER error: \(error) function: \(#function)")
+        }
+        
+        // set current request as complete
+        task.setTaskCompleted(success: true)
+        
+    }
+    
+    // function called to request background processing that will set notifications at the right time
+    func scheduleAtWakeup() {
+        print("FILTER \(#function) called at \(Date())")
+        print("FILTER wakeuptime is currently \(WakeupTime)")
+        
+        // cancel any old requests
+        BGTaskScheduler.shared.cancelAllTaskRequests()
+        
+        // reschedule the function to be in the background
+        let request = BGProcessingTaskRequest(identifier: "HenryRoutson_identifier")
+        request.earliestBeginDate = WakeupTime.addingTimeInterval(TimeInterval(30.0)) // might not activate on time
+        do {
+            try BGTaskScheduler.shared.submit(request)
+            print("Filter \(#function) requested BG for Wakeuptime")
+        }
+        catch {
+            print("FILTER error: \(error) function: \(#function)")
         }
     }
     
-    func StopWakeupNotifications() {
-        print("FILTER  ",#function)
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-        NotificationsSet = false
-    }
     
     var body: some View {
         
@@ -88,7 +114,7 @@ struct ContentView: View {
                 .padding([.top, .leading, .trailing])
                 .padding(.bottom, 3)
         
-            Text("'LED flash for alerts' needs to be enabled\nand 'Do not disturb' needs to turn off before the set time")
+            Text("'With search, enable 'LED flash for alerts',\n turn off 'low power mode', and 'Do not disturb' before the set alarm time")
                 .foregroundColor(Color.gray)
                 .multilineTextAlignment(.center)
                 .padding([.leading, .bottom, .trailing])
@@ -113,24 +139,10 @@ struct ContentView: View {
                        displayedComponents: [.hourAndMinute])
                 .padding([.top, .leading, .trailing], 40.0)
                 .padding(.bottom, 10.0)
-                .onChange(of: WakeupTime) { x in
-                    print("FILTER datepicker")
-                    StopWakeupNotifications()
-                    SetWakeupNotifications()
-                }
             
             Toggle("On/Off", isOn: $NotificationToggle)
                 .padding(.horizontal, 80.0)
                 .padding(.bottom, 100.0)
-                .onChange(of: NotificationToggle) { x in
-                    print("FILTER toggle")
-                    if NotificationToggle {
-                        SetWakeupNotifications()
-                    }
-                    else {
-                        StopWakeupNotifications()
-                    }
-                }
             
             Button("How to use") {
                 self.useAlertShowing = true
@@ -149,8 +161,8 @@ struct ContentView: View {
                 .padding(.all)
                 .background(Color.black)
                 .cornerRadius(30)
+                .padding(.vertical)
         }
-        .padding(.vertical)
     }
 }
 

@@ -16,6 +16,7 @@
 
 /* Begin PBXFileReference section */
 		BA94ADB225B66B8F00A8D8B1 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		BAA5F03B25B904CF001A8CC6 /* Light WakeupRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Light WakeupRelease.entitlements"; sourceTree = "<group>"; };
 		BAEA45D925A42E5E002BCAF1 /* Light Wakeup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Light Wakeup.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAEA45DC25A42E5E002BCAF1 /* Light_WakeupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light_WakeupApp.swift; sourceTree = "<group>"; };
 		BAEA45DE25A42E5E002BCAF1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +55,7 @@
 		BAEA45DB25A42E5E002BCAF1 /* Light Wakeup */ = {
 			isa = PBXGroup;
 			children = (
+				BAA5F03B25B904CF001A8CC6 /* Light WakeupRelease.entitlements */,
 				BAEA45DC25A42E5E002BCAF1 /* Light_WakeupApp.swift */,
 				BAEA45DE25A42E5E002BCAF1 /* ContentView.swift */,
 				BAEA45E025A42E61002BCAF1 /* Assets.xcassets */,
@@ -293,6 +295,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Light Wakeup/Light WakeupRelease.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Light Wakeup/Preview Content\"";
 				DEVELOPMENT_TEAM = 2Y8SCL49VM;
