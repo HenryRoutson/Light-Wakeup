@@ -58,7 +58,7 @@ struct ContentView: View {
         SetWakeupNotifications(time: Date())
         
         // reschedule the function, to re-set notificiations
-        let request = BGProcessingTaskRequest(identifier: "HenryRoutson_identifier2")
+        let request = BGProcessingTaskRequest(identifier: "HenryRoutson_identifier")
         request.earliestBeginDate = Date().addingTimeInterval(TimeInterval(30.0))
         do {
             try BGTaskScheduler.shared.submit(request)
@@ -71,40 +71,6 @@ struct ContentView: View {
         task.setTaskCompleted(success: true)
         
     }
-    
-    // function called to request background processing that will set notifications at the right time
-    func scheduleProcessingAtWakeup() {
-
-        // cancel any old task requests
-        BGTaskScheduler.shared.cancelAllTaskRequests()
-        
-        // reschedule the function to be in the background
-        let request = BGProcessingTaskRequest(identifier: "HenryRoutson_identifier")
-        request.earliestBeginDate = WakeupTime.addingTimeInterval(TimeInterval(30.0)) // might not activate on time
-        do {
-            try BGTaskScheduler.shared.submit(request)
-        }
-        catch {
-            print("FILTER error: \(error) function: \(#function)")
-        }
-    }
-    
-    func scheduleAppRefreshAtWakeup() {
-        
-        // cancel any old task requests
-        BGTaskScheduler.shared.cancelAllTaskRequests()
-        
-        // reschedule the function to be in the background
-        let request = BGAppRefreshTaskRequest(identifier: "HenryRoutson_identifier2")
-        request.earliestBeginDate = WakeupTime.addingTimeInterval(TimeInterval(30.0)) // might not activate on time
-        do {
-            try BGTaskScheduler.shared.submit(request)
-        }
-        catch {
-            print("FILTER error: \(error) function: \(#function)")
-        }
-    }
-    
     
     var body: some View {
         
