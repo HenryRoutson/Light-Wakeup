@@ -46,9 +46,9 @@ struct Light_WakeupApp: App {
                 
                 if ContentView().NotificationToggle == true {
                     ContentView().scheduleAppRefreshAtWakeup()
+                    ContentView().SetWakeupNotifications(time: ContentView().WakeupTime)
                 }
             }
-            print("FILTER essential tasks completed")
             UIApplication.shared.endBackgroundTask(Essential)
             
         }
