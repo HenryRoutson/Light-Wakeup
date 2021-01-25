@@ -10,7 +10,7 @@ import BackgroundTasks
 struct ContentView: View {
     
     // Universal
-    @State var WakeupTime = Date()
+    @State var WakeupTime = Date() // most common wakeup time is 6:00
     @State private var useAlertShowing = false
     
     // Notification flash values
@@ -36,7 +36,7 @@ struct ContentView: View {
         var NotificationTime = Date(timeInterval: 5, since: time) // rather than wakeuptime as time is controlled by BGTask scheduler
         let formatter3 = DateFormatter()  // For testing
         formatter3.dateFormat = "HH:mm"  // For testing
-        for n in 1...60 {
+        for n in 1...64 {
             
             //send notification
             content.body = NSString.localizedUserNotificationString(forKey: "set \(formatter3.string(from: Date())) wakeupTime \(formatter3.string(from: WakeupTime)) number \(n)", arguments: nil) // For testing
