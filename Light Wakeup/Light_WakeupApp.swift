@@ -22,7 +22,6 @@ struct Light_WakeupApp: App {
         BGTaskScheduler.shared.register(forTaskWithIdentifier: "HenryRoutson_identifier2", using: nil) { (BGTask) in
             ContentView().BackgroundNotificationAppRefresh(task: BGTask as! BGAppRefreshTask)
         }
-        print("FILTER BGTask registered")
         
         // ask for notification permission, if not already
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
@@ -39,18 +38,20 @@ struct Light_WakeupApp: App {
             if  phase == .active {
                 UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             }
-            if phase != .active && ContentView().NotificationToggle == true {
+            if phase != .active {
                 var Essential = UIBackgroundTaskIdentifier(rawValue: 1)
                 Essential = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
                 
                 UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                 BGTaskScheduler.shared.cancelAllTaskRequests()
-                ContentView().SetWakeupNotifications(time: ContentView().WakeupTime)
-                for _ in 1...10 {
-                    ContentView().scheduleProcessingAtWakeup()
+                
+                if ContentView().NotificationToggle == true {
+                    ContentView().SetWakeupNotifications(time: ContentView().WakeupTime)
+                    for _ in 1...10 {
+                        ContentView().scheduleProcessingAtWakeup()
+                    }
+                    ContentView().scheduleAppRefreshAtWakeup()
                 }
-                ContentView().scheduleAppRefreshAtWakeup()
-                print("FILTER essential work done")
                 
                 UIApplication.shared.endBackgroundTask(Essential)
             }

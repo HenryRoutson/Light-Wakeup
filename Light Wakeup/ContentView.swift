@@ -20,7 +20,6 @@ struct ContentView: View {
         
     // send requests to send notifications that wake up the user
     func SetWakeupNotifications(time: Date) {
-        print("FILTER  ",#function, WakeupTime)
         
         // remove old notifications
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
