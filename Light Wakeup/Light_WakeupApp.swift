@@ -48,7 +48,7 @@ struct Light_WakeupApp: App {
                     ContentView().SetWakeupNotifications(time: ContentView().WakeupTime)
                     
                     // schedule background task to refresh notifications
-                    let request = BGAppRefreshTaskRequest(identifier: "HenryRoutson_identifier2")
+                    let request = BGAppRefreshTaskRequest(identifier: "HenryRoutson_identifier")
                     request.earliestBeginDate = ContentView().WakeupTime.addingTimeInterval(TimeInterval(30.0)) // might not activate on time
                     do {
                         try BGTaskScheduler.shared.submit(request)
