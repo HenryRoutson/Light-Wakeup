@@ -15,7 +15,7 @@ struct Light_WakeupApp: App {
     init() {
 
         // Register function to be a background task
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: "HenryRoutson_identifier2", using: nil) { (BGTask) in
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: "HenryRoutson_identifier", using: nil) { (BGTask) in
             ContentView().BackgroundNotificationAppRefresh(task: BGTask as! BGAppRefreshTask)
         }
         
@@ -34,8 +34,6 @@ struct Light_WakeupApp: App {
             var Essential = UIBackgroundTaskIdentifier(rawValue: 1)
             Essential = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
             
-            print("FILTER phase is \(phase)")
-            
             // if the app is turned off or on, remove old requests
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             UNUserNotificationCenter.current().removeAllDeliveredNotifications()
@@ -47,6 +45,7 @@ struct Light_WakeupApp: App {
                 if ContentView().NotificationToggle == true {
                     ContentView().scheduleAppRefreshAtWakeup()
                     ContentView().SetWakeupNotifications(time: ContentView().WakeupTime)
+                    print("FILTER wakeuptime set \(ContentView().WakeupTime)")
                 }
             }
             UIApplication.shared.endBackgroundTask(Essential)
