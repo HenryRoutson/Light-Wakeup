@@ -34,10 +34,12 @@ struct ContentView: View {
         // create loop to schedule sequential notifications
         // Note that at max 64 or 2^6 can be created and if more are only the latest are fired
         var NotificationTime = Date(timeInterval: 5, since: time) // rather than wakeuptime as time is controlled by BGTask scheduler
+        let formatter3 = DateFormatter()  // For testing
+        formatter3.dateFormat = "HH:mm"  // For testing
         for n in 1...60 {
             
             //send notification
-            content.body = NSString.localizedUserNotificationString(forKey: "set \(Date()) for \(NotificationTime) number \(n) ", arguments: nil) // For testing
+            content.body = NSString.localizedUserNotificationString(forKey: "set \(formatter3.string(from: Date())) wakeupTime \(formatter3.string(from: WakeupTime)) number \(n)", arguments: nil) // For testing
             let dateMatching = Calendar.current.dateComponents([.hour, .minute, .second], from: NotificationTime)
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: true)
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
@@ -47,27 +49,6 @@ struct ContentView: View {
             // Note that shorter time intervals can stop vibration
             NotificationTime = Date(timeInterval: 0.5, since: NotificationTime)
             }
-    }
-    
-    
-    // Define background code to stop and set Notififcations and then reschedule itself
-    func BackgroundNotificationProcessing(task: BGProcessingTask) {
-        
-        // set notifications
-        SetWakeupNotifications(time: Date())
-        
-        // reschedule the function, to re-set notificiations
-        let request = BGProcessingTaskRequest(identifier: "HenryRoutson_identifier")
-        request.earliestBeginDate = Date().addingTimeInterval(TimeInterval(30.0))
-        do {
-            try BGTaskScheduler.shared.submit(request)
-        }
-        catch {
-            print("FILTER error: \(error) function: \(#function)")
-        }
-        
-        // set current request as complete
-        task.setTaskCompleted(success: true)
     }
     
     func BackgroundNotificationAppRefresh(task: BGAppRefreshTask) {

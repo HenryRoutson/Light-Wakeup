@@ -15,10 +15,6 @@ struct Light_WakeupApp: App {
     init() {
 
         // Register function to be a background task
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: "HenryRoutson_identifier", using: nil) { (BGTask) in
-            ContentView().BackgroundNotificationProcessing(task: BGTask as! BGProcessingTask)
-        }
-        // Register function to be a background task
         BGTaskScheduler.shared.register(forTaskWithIdentifier: "HenryRoutson_identifier2", using: nil) { (BGTask) in
             ContentView().BackgroundNotificationAppRefresh(task: BGTask as! BGAppRefreshTask)
         }
@@ -34,27 +30,27 @@ struct Light_WakeupApp: App {
             ContentView()
         }
         .onChange(of: ScenePhase) { phase in
+            // make sure all code is executed
+            var Essential = UIBackgroundTaskIdentifier(rawValue: 1)
+            Essential = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+            
             print("FILTER phase is \(phase)")
-            if  phase == .active {
-                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-            }
+            
+            // if the app is turned off or on, remove old requests
+            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+            BGTaskScheduler.shared.cancelAllTaskRequests()
+            
+            // if the app is turned off, make requests with possibly new data 
             if phase != .active {
-                var Essential = UIBackgroundTaskIdentifier(rawValue: 1)
-                Essential = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
-                
-                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-                BGTaskScheduler.shared.cancelAllTaskRequests()
                 
                 if ContentView().NotificationToggle == true {
-                    ContentView().SetWakeupNotifications(time: ContentView().WakeupTime)
-                    for _ in 1...10 {
-                        ContentView().scheduleProcessingAtWakeup()
-                    }
                     ContentView().scheduleAppRefreshAtWakeup()
                 }
-                
-                UIApplication.shared.endBackgroundTask(Essential)
             }
+            print("FILTER essential tasks completed")
+            UIApplication.shared.endBackgroundTask(Essential)
+            
         }
     }
 }
