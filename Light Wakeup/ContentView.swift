@@ -69,23 +69,6 @@ struct ContentView: View {
         
         // set current request as complete
         task.setTaskCompleted(success: true)
-        
-    }
-    
-    func scheduleAppRefreshAtWakeup() {
-        
-        // cancel any old task requests
-        BGTaskScheduler.shared.cancelAllTaskRequests()
-        
-        // reschedule the function to be in the background
-        let request = BGAppRefreshTaskRequest(identifier: "HenryRoutson_identifier2")
-        request.earliestBeginDate = WakeupTime.addingTimeInterval(TimeInterval(30.0)) // might not activate on time
-        do {
-            try BGTaskScheduler.shared.submit(request)
-        }
-        catch {
-            print("FILTER error: \(error) function: \(#function)")
-        }
     }
     
     var body: some View {

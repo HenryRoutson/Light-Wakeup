@@ -43,13 +43,24 @@ struct Light_WakeupApp: App {
             if phase != .active {
                 
                 if ContentView().NotificationToggle == true {
-                    ContentView().scheduleAppRefreshAtWakeup()
+                    
+                    // schedule notifications
                     ContentView().SetWakeupNotifications(time: ContentView().WakeupTime)
+                    
+                    // schedule background task to refresh notifications
+                    let request = BGAppRefreshTaskRequest(identifier: "HenryRoutson_identifier2")
+                    request.earliestBeginDate = ContentView().WakeupTime.addingTimeInterval(TimeInterval(30.0)) // might not activate on time
+                    do {
+                        try BGTaskScheduler.shared.submit(request)
+                    }
+                    catch {
+                        print("FILTER error: \(error) function: \(#function)")
+                    }
                     print("FILTER wakeuptime set \(ContentView().WakeupTime)")
-                }
-            }
+                    }
+                
             UIApplication.shared.endBackgroundTask(Essential)
-            
+            }
         }
     }
 }
