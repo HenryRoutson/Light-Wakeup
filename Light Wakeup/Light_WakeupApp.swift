@@ -16,7 +16,11 @@ struct Light_WakeupApp: App {
 
         // Register function to be a background task
         BGTaskScheduler.shared.register(forTaskWithIdentifier: "HenryRoutson_identifier", using: nil) { (BGTask) in
-            ContentView().BackgroundNotificationRefresh(task: BGTask as! BGProcessingTask)
+            ContentView().BackgroundNotificationProcessing(task: BGTask as! BGProcessingTask)
+        }
+        // Register function to be a background task
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: "HenryRoutson_identifier2", using: nil) { (BGTask) in
+            ContentView().BackgroundNotificationAppRefresh(task: BGTask as! BGAppRefreshTask)
         }
         print("FILTER BGTask registered")
         
@@ -33,15 +37,21 @@ struct Light_WakeupApp: App {
         .onChange(of: ScenePhase) { phase in
             print("FILTER phase is \(phase)")
             if  phase == .active {
-                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                 UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-                BGTaskScheduler.shared.cancelAllTaskRequests()
             }
             if phase != .active && ContentView().NotificationToggle == true {
                 var Essential = UIBackgroundTaskIdentifier(rawValue: 1)
                 Essential = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+                
+                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                BGTaskScheduler.shared.cancelAllTaskRequests()
                 ContentView().SetWakeupNotifications(time: ContentView().WakeupTime)
-                ContentView().scheduleAtWakeup()
+                for _ in 1...10 {
+                    ContentView().scheduleProcessingAtWakeup()
+                }
+                ContentView().scheduleAppRefreshAtWakeup()
+                print("FILTER essential work done")
+                
                 UIApplication.shared.endBackgroundTask(Essential)
             }
         }

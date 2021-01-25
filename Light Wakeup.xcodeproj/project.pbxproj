@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA94ADB325B66B8F00A8D8B1 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA94ADB125B66B8F00A8D8B1 /* Model.xcdatamodeld */; };
 		BAEA45DD25A42E5E002BCAF1 /* Light_WakeupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEA45DC25A42E5E002BCAF1 /* Light_WakeupApp.swift */; };
 		BAEA45DF25A42E5E002BCAF1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEA45DE25A42E5E002BCAF1 /* ContentView.swift */; };
 		BAEA45E125A42E61002BCAF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAEA45E025A42E61002BCAF1 /* Assets.xcassets */; };
@@ -15,7 +14,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BA94ADB225B66B8F00A8D8B1 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		BAA5F03B25B904CF001A8CC6 /* Light WakeupRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Light WakeupRelease.entitlements"; sourceTree = "<group>"; };
 		BAEA45D925A42E5E002BCAF1 /* Light Wakeup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Light Wakeup.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAEA45DC25A42E5E002BCAF1 /* Light_WakeupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light_WakeupApp.swift; sourceTree = "<group>"; };
@@ -60,7 +58,6 @@
 				BAEA45DE25A42E5E002BCAF1 /* ContentView.swift */,
 				BAEA45E025A42E61002BCAF1 /* Assets.xcassets */,
 				BAEA45E525A42E61002BCAF1 /* Info.plist */,
-				BA94ADB125B66B8F00A8D8B1 /* Model.xcdatamodeld */,
 				BAEA45E225A42E61002BCAF1 /* Preview Content */,
 			);
 			path = "Light Wakeup";
@@ -145,7 +142,6 @@
 			files = (
 				BAEA45DF25A42E5E002BCAF1 /* ContentView.swift in Sources */,
 				BAEA45DD25A42E5E002BCAF1 /* Light_WakeupApp.swift in Sources */,
-				BA94ADB325B66B8F00A8D8B1 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,19 +331,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		BA94ADB125B66B8F00A8D8B1 /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				BA94ADB225B66B8F00A8D8B1 /* Model.xcdatamodel */,
-			);
-			currentVersion = BA94ADB225B66B8F00A8D8B1 /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = BAEA45D125A42E5E002BCAF1 /* Project object */;
 }

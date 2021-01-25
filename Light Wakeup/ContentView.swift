@@ -5,7 +5,6 @@
 
 import SwiftUI
 import UserNotifications
-import CoreData
 import BackgroundTasks
 
 struct ContentView: View {
@@ -13,13 +12,9 @@ struct ContentView: View {
     // Universal
     @State var WakeupTime = Date()
     @State private var useAlertShowing = false
-    let TimeMinDuration = 0.5 // double, dont make a fraction
-    
-    // Flashlight with app on - might include in a later update
     
     // Notification flash values
     @State var NotificationToggle = true
-    let NotificationSecTimeInterval = 0.5 // double
     
     // Notification flash functions
         
@@ -35,35 +30,29 @@ struct ContentView: View {
         let content = UNMutableNotificationContent()
         content.title = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
         content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.0)
+        //content.body = NSString.localizedUserNotificationString(forKey: "Click on this notification to stop more", arguments: nil)
         
         // create loop to schedule sequential notifications
         // Note that at max 64 or 2^6 can be created and if more are only the latest are fired
-        let loops = Int(Double(TimeMinDuration*60)/NotificationSecTimeInterval)
-        print("FILTER          \(loops) notifications")
         var NotificationTime = Date(timeInterval: 5, since: time) // rather than wakeuptime as time is controlled by BGTask scheduler
-        for n in 1...loops {
+        for n in 1...60 {
             
             //send notification
-            content.body = NSString.localizedUserNotificationString(forKey: "\(NotificationTime)  \(n)", arguments: nil)
+            content.body = NSString.localizedUserNotificationString(forKey: "set \(Date()) for \(NotificationTime) number \(n) ", arguments: nil) // For testing
             let dateMatching = Calendar.current.dateComponents([.hour, .minute, .second], from: NotificationTime)
-
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: true)
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request)
             
             // add to time for next notification
             // Note that shorter time intervals can stop vibration
-            NotificationTime = Date(timeInterval: NotificationSecTimeInterval, since: NotificationTime)
+            NotificationTime = Date(timeInterval: 0.5, since: NotificationTime)
             }
-        print("FILTER     Final time:", NotificationTime)
     }
     
     
     // Define background code to stop and set Notififcations and then reschedule itself
-    // run with:
-    // e -l objc -- (void)[[BGTaskScheduler sharedScheduler] _simulateLaunchForTaskWithIdentifier:@"HenryRoutson_identifier"]
-    func BackgroundNotificationRefresh(task: BGProcessingTask) {
-        print("FILTER BGTask running: \(Date()) ")
+    func BackgroundNotificationProcessing(task: BGProcessingTask) {
         
         // set notifications
         SetWakeupNotifications(time: Date())
@@ -73,7 +62,26 @@ struct ContentView: View {
         request.earliestBeginDate = Date().addingTimeInterval(TimeInterval(30.0))
         do {
             try BGTaskScheduler.shared.submit(request)
-            print("Filter \(#function) requested BG")
+        }
+        catch {
+            print("FILTER error: \(error) function: \(#function)")
+        }
+        
+        // set current request as complete
+        task.setTaskCompleted(success: true)
+    }
+    
+    func BackgroundNotificationAppRefresh(task: BGAppRefreshTask) {
+        print("FILTER", #function)
+        
+        // set notifications
+        SetWakeupNotifications(time: Date())
+        
+        // reschedule the function, to re-set notificiations
+        let request = BGProcessingTaskRequest(identifier: "HenryRoutson_identifier2")
+        request.earliestBeginDate = Date().addingTimeInterval(TimeInterval(30.0))
+        do {
+            try BGTaskScheduler.shared.submit(request)
         }
         catch {
             print("FILTER error: \(error) function: \(#function)")
@@ -85,11 +93,9 @@ struct ContentView: View {
     }
     
     // function called to request background processing that will set notifications at the right time
-    func scheduleAtWakeup() {
-        print("FILTER \(#function) called at \(Date())")
-        print("FILTER wakeuptime is currently \(WakeupTime)")
-        
-        // cancel any old requests
+    func scheduleProcessingAtWakeup() {
+
+        // cancel any old task requests
         BGTaskScheduler.shared.cancelAllTaskRequests()
         
         // reschedule the function to be in the background
@@ -97,7 +103,22 @@ struct ContentView: View {
         request.earliestBeginDate = WakeupTime.addingTimeInterval(TimeInterval(30.0)) // might not activate on time
         do {
             try BGTaskScheduler.shared.submit(request)
-            print("Filter \(#function) requested BG for Wakeuptime")
+        }
+        catch {
+            print("FILTER error: \(error) function: \(#function)")
+        }
+    }
+    
+    func scheduleAppRefreshAtWakeup() {
+        
+        // cancel any old task requests
+        BGTaskScheduler.shared.cancelAllTaskRequests()
+        
+        // reschedule the function to be in the background
+        let request = BGAppRefreshTaskRequest(identifier: "HenryRoutson_identifier2")
+        request.earliestBeginDate = WakeupTime.addingTimeInterval(TimeInterval(30.0)) // might not activate on time
+        do {
+            try BGTaskScheduler.shared.submit(request)
         }
         catch {
             print("FILTER error: \(error) function: \(#function)")
