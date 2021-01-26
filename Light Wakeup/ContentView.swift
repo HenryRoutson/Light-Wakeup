@@ -13,13 +13,15 @@ struct ContentView: View {
     @State var WakeupTime = Date() // most common wakeup time is 6:00
     @State private var useAlertShowing = false
     
+    // NOTIFICATION WAKEUP
+    
     // Notification flash values
     @State var NotificationToggle = true
+    @State var NotificationBGTask = UIBackgroundTaskIdentifier(rawValue: 0)
     
     // Notification flash functions
         
-    // send requests to send notifications that wake up the user
-    func SetWakeupNotifications(time: Date) {
+    func Notifications_Send() {
         
         // remove old notifications
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
@@ -32,45 +34,41 @@ struct ContentView: View {
         //content.body = NSString.localizedUserNotificationString(forKey: "Click on this notification to stop more", arguments: nil)
         
         // create loop to schedule sequential notifications
-        // Note that at max 64 or 2^6 can be created and if more are only the latest are fired
-        var NotificationTime = Date(timeInterval: 5, since: time) // rather than wakeuptime as time is controlled by BGTask scheduler
-        let formatter3 = DateFormatter()  // For testing
-        formatter3.dateFormat = "HH:mm"  // For testing
-        for n in 1...64 {
-            
-            //send notification
-            content.body = NSString.localizedUserNotificationString(forKey: "set \(formatter3.string(from: Date())) wakeupTime \(formatter3.string(from: WakeupTime)) number \(n)", arguments: nil) // For testing
+        // note that if more than 64 or 2^6 notifications are created, old the latest scheduled will be shown
+        var NotificationTime = Date(timeInterval: 5, since: Date()) // rather than wakeuptime as time is controlled by BGTask scheduler
+        for _ in 1...64 {
             let dateMatching = Calendar.current.dateComponents([.hour, .minute, .second], from: NotificationTime)
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: true)
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request)
             
-            // add to time for next notification
+            // create time seperation between notifications
             // Note that shorter time intervals can stop vibration
             NotificationTime = Date(timeInterval: 0.5, since: NotificationTime)
             }
     }
     
-    func BackgroundNotificationAppRefresh(task: BGAppRefreshTask) {
-        print("FILTER", #function)
-        
-        // set notifications
-        SetWakeupNotifications(time: Date())
-        
-        // reschedule the function, to re-set notificiations
-        let request = BGProcessingTaskRequest(identifier: "HenryRoutson_identifier")
-        request.earliestBeginDate = Date().addingTimeInterval(TimeInterval(30.0))
-        do {
-            try BGTaskScheduler.shared.submit(request)
+    func Notifications_StartBGTask_ToCallSend() {
+        NotificationBGTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+
+        print("FITER \(#function) \(Date())")
+        print("FILTER wakeupTime is \(WakeupTime)")
+        // order dates in chronological left to right
+        if WakeupTime < Date() && Date() < WakeupTime.addingTimeInterval(15*60) {
+            print("FILTER sending wakeup notifications")
+            Notifications_Send()
         }
-        catch {
-            print("FILTER error: \(error) function: \(#function)")
+        else {
+            UIApplication.shared.endBackgroundTask(NotificationBGTask)
         }
-        
-        // set current request as complete
-        task.setTaskCompleted(success: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+            UIApplication.shared.endBackgroundTask(NotificationBGTask)
+            print("FILTER Background task ended")
+            Notifications_StartBGTask_ToCallSend()
+            
+        }
     }
-    
+
     var body: some View {
         
         VStack {
