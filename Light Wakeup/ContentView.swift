@@ -11,6 +11,7 @@ struct ContentView: View {
     
     // Universal
     @State var WakeupTime = Date() // most common wakeup time is 6:00
+    @State var WakeupDuration = 30 // in minutes
     @State private var useAlertShowing = false
     
     // NOTIFICATION WAKEUP
@@ -31,11 +32,11 @@ struct ContentView: View {
         let content = UNMutableNotificationContent()
         content.title = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
         content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.0)
-        //content.body = NSString.localizedUserNotificationString(forKey: "Click on this notification to stop more", arguments: nil)
+        content.body = NSString.localizedUserNotificationString(forKey: "Click on this notification to stop more", arguments: nil)
         
         // create loop to schedule sequential notifications
         // note that if more than 64 or 2^6 notifications are created, old the latest scheduled will be shown
-        var NotificationTime = Date(timeInterval: 5, since: Date()) // rather than wakeuptime as time is controlled by BGTask scheduler
+        var NotificationTime = Date(timeInterval: 5, since: Date())
         for _ in 1...64 {
             let dateMatching = Calendar.current.dateComponents([.hour, .minute, .second], from: NotificationTime)
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: true)
@@ -54,7 +55,7 @@ struct ContentView: View {
         print("FITER \(#function) \(Date())")
         print("FILTER wakeupTime is \(WakeupTime)")
         // order dates in chronological left to right
-        if WakeupTime < Date() && Date() < WakeupTime.addingTimeInterval(15*60) {
+        if WakeupTime < Date() && Date() < WakeupTime.addingTimeInterval(TimeInterval(WakeupDuration*60)) {
             print("FILTER sending wakeup notifications")
             Notifications_Send()
         }
