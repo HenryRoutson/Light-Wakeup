@@ -58,9 +58,8 @@ struct Light_WakeupApp: App {
                     }
                     print("FILTER wakeuptime set \(ContentView().WakeupTime)")
                     }
-                
-            UIApplication.shared.endBackgroundTask(Essential)
             }
+            UIApplication.shared.endBackgroundTask(Essential)
         }
     }
 }
