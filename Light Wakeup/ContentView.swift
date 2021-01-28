@@ -105,16 +105,18 @@ struct ContentView: View {
                 .padding([.top, .leading, .trailing], 40.0)
                 .padding(.bottom, 10.0)
                 .onChange(of: WakeupTime) { _ in
-                    print("FILTER wakeupTime state saved")
                     UserDefaults.standard.set(WakeupTime, forKey: "WakeupTime")
+                    print(WakeupTime)
+                    print(print(UserDefaults.standard.object(forKey: "WakeupTime")! as! Date))
                 }
             
             Toggle("On/Off", isOn: $NotificationToggle)
                 .padding(.horizontal, 80.0)
                 .padding(.bottom, 100.0)
-                .onChange(of: WakeupTime) { _ in
-                    print("FILTER wakeupToggle state saved")
+                .onChange(of: NotificationToggle) { _ in
                     UserDefaults.standard.set(NotificationToggle, forKey: "WakeupToggle")
+                    print(NotificationToggle)
+                    print(UserDefaults.standard.object(forKey: "WakeupToggle")! as! Bool)
                 }
             
             Button("How to use") {

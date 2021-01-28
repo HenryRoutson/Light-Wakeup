@@ -13,11 +13,23 @@ struct Light_WakeupApp: App {
     @Environment(\.scenePhase) var ScenePhase
     
     init() {
-        print("FILTER", #function)
         
-        // ask for notification permission, if not already
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
-            if granted == true && error == nil { print("FILTER Notifications permitted") }
+        let hasLaunchedKey = "HasLaunched"
+        let defaults = UserDefaults.standard
+        let hasLaunched = defaults.bool(forKey: hasLaunchedKey)
+
+        if !hasLaunched {
+            defaults.set(true, forKey: hasLaunchedKey)
+            print("FILTER", #function)
+    
+            // set default values
+            defaults.set(Calendar.current.date(bySettingHour: 7, minute: 30, second: 0, of: Date())!, forKey: "WakeupTime")
+            defaults.set(true, forKey: "WakeupToggle")
+            
+            // ask for notification permission, if not already
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
+                if granted == true && error == nil { print("FILTER Notifications permitted") }
+            }
         }
     }
         
