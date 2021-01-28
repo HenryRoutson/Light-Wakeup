@@ -12,7 +12,6 @@ struct ContentView: View {
     // Universal
     @State var WakeupTime = UserDefaults.standard.object(forKey: "WakeupTime")! as! Date
     @State var WakeupDuration = 30 // in minutes
-    @State private var useAlertShowing = false
     
     // NOTIFICATION WAKEUP
     
@@ -91,17 +90,6 @@ struct ContentView: View {
                 .onChange(of: NotificationToggle) { _ in
                     UserDefaults.standard.set(NotificationToggle, forKey: "WakeupToggle")
                 }
-            
-            Button("How to use") {
-                self.useAlertShowing = true
-            }
-            .alert(isPresented: $useAlertShowing) {
-                Alert(title: Text("How to use"), message: Text("After settings have been setup, make sure you have a sound alarm as backup and turn your screen off and facedown"), dismissButton: .default(Text("Okay")))
-            }
-                .foregroundColor(.white)
-                .padding(.all)
-                .background(Color.black)
-                .cornerRadius(30)
             
             Link("Feedback",
                  destination: URL(string: "mailto:yry1f6aq@anonaddy.me")!)
