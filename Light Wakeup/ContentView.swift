@@ -74,29 +74,6 @@ struct ContentView: View {
         
         VStack {
             
-            Text("Setup")
-                .multilineTextAlignment(.center)
-                .padding([.top, .leading, .trailing])
-                .padding(.bottom, 3)
-        
-            Text("'With search, enable 'LED flash for alerts',\n turn off 'low power mode', and 'Do not disturb' before the set alarm time")
-                .foregroundColor(Color.gray)
-                .multilineTextAlignment(.center)
-                .padding([.leading, .bottom, .trailing])
-            
-            // button to open settings
-            // settings URL is ideal but currently not working, IE prefs:root=
-            // https://www.macstories.net/ios/a-comprehensive-guide-to-all-120-settings-urls-supported-by-ios-and-ipados-13-1/
-            Button("Open settings") {
-                if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-                    UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
-                }
-            }
-                .foregroundColor(.white)
-                .padding(.all)
-                .background(Color.black)
-                .cornerRadius(30)
-            
             Spacer()
             
             DatePicker("Select a wakeup time:",
@@ -106,8 +83,6 @@ struct ContentView: View {
                 .padding(.bottom, 10.0)
                 .onChange(of: WakeupTime) { _ in
                     UserDefaults.standard.set(WakeupTime, forKey: "WakeupTime")
-                    print(WakeupTime)
-                    print(print(UserDefaults.standard.object(forKey: "WakeupTime")! as! Date))
                 }
             
             Toggle("On/Off", isOn: $NotificationToggle)
@@ -115,8 +90,6 @@ struct ContentView: View {
                 .padding(.bottom, 100.0)
                 .onChange(of: NotificationToggle) { _ in
                     UserDefaults.standard.set(NotificationToggle, forKey: "WakeupToggle")
-                    print(NotificationToggle)
-                    print(UserDefaults.standard.object(forKey: "WakeupToggle")! as! Bool)
                 }
             
             Button("How to use") {

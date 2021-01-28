@@ -16,9 +16,9 @@ struct Light_WakeupApp: App {
         
         let hasLaunchedKey = "HasLaunched"
         let defaults = UserDefaults.standard
-        let Unlaunched = defaults.bool(forKey: hasLaunchedKey)
+        let hasLaunched = defaults.bool(forKey: hasLaunchedKey)
 
-        if Unlaunched {
+        if !hasLaunched {
             defaults.set(true, forKey: hasLaunchedKey)
             print("FILTER", #function)
     
