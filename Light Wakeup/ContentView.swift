@@ -10,14 +10,14 @@ import BackgroundTasks
 struct ContentView: View {
     
     // Universal
-    @State var WakeupTime = Date() // most common wakeup time is 6:00
+    @State var WakeupTime = UserDefaults.standard.object(forKey: "WakeupTime")! as! Date
     @State var WakeupDuration = 30 // in minutes
     @State private var useAlertShowing = false
     
     // NOTIFICATION WAKEUP
     
     // Notification flash values
-    @State var NotificationToggle = true
+    @State var NotificationToggle = UserDefaults.standard.bool(forKey: "WakeupToggle")
     @State var NotificationBGTask = UIBackgroundTaskIdentifier(rawValue: 0)
     
     // Notification flash functions
@@ -104,10 +104,18 @@ struct ContentView: View {
                        displayedComponents: [.hourAndMinute])
                 .padding([.top, .leading, .trailing], 40.0)
                 .padding(.bottom, 10.0)
+                .onChange(of: WakeupTime) { _ in
+                    print("FILTER wakeupTime state saved")
+                    UserDefaults.standard.set(WakeupTime, forKey: "WakeupTime")
+                }
             
             Toggle("On/Off", isOn: $NotificationToggle)
                 .padding(.horizontal, 80.0)
                 .padding(.bottom, 100.0)
+                .onChange(of: WakeupTime) { _ in
+                    print("FILTER wakeupToggle state saved")
+                    UserDefaults.standard.set(NotificationToggle, forKey: "WakeupToggle")
+                }
             
             Button("How to use") {
                 self.useAlertShowing = true

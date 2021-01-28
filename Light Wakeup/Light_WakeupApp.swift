@@ -13,6 +13,8 @@ struct Light_WakeupApp: App {
     @Environment(\.scenePhase) var ScenePhase
     
     init() {
+        print("FILTER", #function)
+        
         // ask for notification permission, if not already
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
             if granted == true && error == nil { print("FILTER Notifications permitted") }
@@ -39,15 +41,14 @@ struct Light_WakeupApp: App {
             
             // if the app is turned off, make requests with possibly new data 
             if phase != .active {
-                
+                // set alarm if needed
                 if ContentView().NotificationToggle == true {
                     // use background task to refresh notifications
                     ContentView().Notifications_StartBGTask_ToCallSend()
+                }
             }
-                
             // signal that code has run
             UIApplication.shared.endBackgroundTask(PhaseChangeBGTask)
-            }
         }
     }
 }
