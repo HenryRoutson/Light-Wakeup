@@ -49,10 +49,11 @@ struct Light_WakeupApp: App {
             // if the app is turned off or on, remove old requests
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-            UIApplication.shared.endBackgroundTask(ContentView().NotificationBGTask)
+            UIApplication.shared.endBackgroundTask(ContentView().NotificationBGTask) // not sure if this works
             
             // if the app is turned off, make requests with possibly new data 
-            if phase != .active {
+            if phase == .background {
+                
                 // set alarm if needed
                 if ContentView().NotificationToggle == true {
                     // use background task to refresh notifications

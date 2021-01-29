@@ -49,23 +49,35 @@ struct ContentView: View {
     }
     
     func Notifications_StartBGTask_ToCallSend() {
-        NotificationBGTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+        
+        let NotificationBGTask = UIApplication.shared.beginBackgroundTask(expirationHandler: {
+            print("FILTER expired")
+            UIApplication.shared.endBackgroundTask(self.NotificationBGTask)
+        })
 
-        print("FITER \(#function) \(Date())")
-        print("FILTER wakeupTime is \(WakeupTime)")
-        // order dates in chronological left to right
-        if WakeupTime < Date() && Date() < WakeupTime.addingTimeInterval(TimeInterval(WakeupDuration*60)) {
-            print("FILTER sending wakeup notifications")
+        // if date is before
+        if Date() < WakeupTime {
+            print("FILTER before")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+                UIApplication.shared.endBackgroundTask(NotificationBGTask)
+                Notifications_StartBGTask_ToCallSend()
+            }
+        }
+        
+        // if date is inside
+        else if WakeupTime < Date() && Date() < WakeupTime.addingTimeInterval(TimeInterval(WakeupDuration*60)) {
+            print("FILTER inside")
             Notifications_Send()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+                UIApplication.shared.endBackgroundTask(NotificationBGTask)
+                Notifications_StartBGTask_ToCallSend()
+            }
         }
-        else {
+        
+        // if date is after
+        else if WakeupTime.addingTimeInterval(TimeInterval(WakeupDuration*60)) < Date() {
+            print("FILTER after")
             UIApplication.shared.endBackgroundTask(NotificationBGTask)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
-            UIApplication.shared.endBackgroundTask(NotificationBGTask)
-            print("FILTER Background task ended")
-            Notifications_StartBGTask_ToCallSend()
-            
         }
     }
 
@@ -91,7 +103,7 @@ struct ContentView: View {
                     UserDefaults.standard.set(NotificationToggle, forKey: "WakeupToggle")
                 }
             
-            Link("Feedback",
+            Link("     Feedback     ",
                  destination: URL(string: "mailto:yry1f6aq@anonaddy.me")!)
                 .foregroundColor(.white)
                 .padding(.all)
