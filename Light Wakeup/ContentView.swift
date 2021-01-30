@@ -16,7 +16,7 @@ struct ContentView: View {
     // NOTIFICATION WAKEUP
     
     // Notification flash values
-    @State var NotificationToggle = UserDefaults.standard.bool(forKey: "WakeupToggle")
+    @AppStorage("NotificationToggleStored") var NotificationToggle = true
     @State var NotificationBGTask = UIBackgroundTaskIdentifier(rawValue: 0)
     
     // Notification flash functions
@@ -65,7 +65,7 @@ struct ContentView: View {
         }
         
         // if date is inside
-        else if WakeupTime < Date() && Date() < WakeupTime.addingTimeInterval(TimeInterval(WakeupDuration*60)) {
+        else if Date() < WakeupTime.addingTimeInterval(TimeInterval(WakeupDuration*60)) {
             print("FILTER inside")
             Notifications_Send()
             DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
@@ -75,7 +75,7 @@ struct ContentView: View {
         }
         
         // if date is after
-        else if WakeupTime.addingTimeInterval(TimeInterval(WakeupDuration*60)) < Date() {
+        else {
             print("FILTER after")
             UIApplication.shared.endBackgroundTask(NotificationBGTask)
         }
@@ -93,15 +93,13 @@ struct ContentView: View {
                 .padding([.top, .leading, .trailing], 40.0)
                 .padding(.bottom, 10.0)
                 .onChange(of: WakeupTime) { _ in
+                    print(Calendar.current.date(bySettingHour: 7, minute: 30, second: 0, of: Date())!)
                     UserDefaults.standard.set(WakeupTime, forKey: "WakeupTime")
                 }
             
             Toggle("On/Off", isOn: $NotificationToggle)
                 .padding(.horizontal, 80.0)
                 .padding(.bottom, 100.0)
-                .onChange(of: NotificationToggle) { _ in
-                    UserDefaults.standard.set(NotificationToggle, forKey: "WakeupToggle")
-                }
             
             Link("       Feedback       ",
                  destination: URL(string: "mailto:yry1f6aq@anonaddy.me")!)

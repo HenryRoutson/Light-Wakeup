@@ -22,9 +22,6 @@ struct Light_WakeupApp: App {
         if !hasLaunched {
             defaults.set(true, forKey: hasLaunchedKey)
             print("FILTER", #function)
-            // set default values
-            defaults.set(Calendar.current.date(bySettingHour: 7, minute: 30, second: 0, of: Date())!, forKey: "WakeupTime")
-            defaults.set(true, forKey: "WakeupToggle")
             
             // ask for notification permission, if not already
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
