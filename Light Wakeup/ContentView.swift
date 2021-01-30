@@ -103,13 +103,16 @@ struct ContentView: View {
                     UserDefaults.standard.set(NotificationToggle, forKey: "WakeupToggle")
                 }
             
-            Link("     Feedback     ",
+            Link("       Feedback       ",
                  destination: URL(string: "mailto:yry1f6aq@anonaddy.me")!)
                 .foregroundColor(.white)
                 .padding(.all)
                 .background(Color.black)
                 .cornerRadius(30)
-                .padding(.vertical)
+                .overlay(
+                    Capsule().stroke(Color.white, lineWidth: 1)
+                        )
+                .padding(.vertical, 50)
         }
     }
 }

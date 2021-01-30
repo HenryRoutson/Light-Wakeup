@@ -11,6 +11,7 @@ import BackgroundTasks
 @main
 struct Light_WakeupApp: App {
     @Environment(\.scenePhase) var ScenePhase
+    @State var selection = 1
     
     init() {
         
@@ -19,6 +20,7 @@ struct Light_WakeupApp: App {
         let hasLaunched = defaults.bool(forKey: hasLaunchedKey)
 
         if !hasLaunched {
+            selection = 0
             defaults.set(true, forKey: hasLaunchedKey)
             print("FILTER", #function)
     
@@ -31,11 +33,19 @@ struct Light_WakeupApp: App {
                 if granted == true && error == nil { print("FILTER Notifications permitted") }
             }
         }
+        else {
+            print()
+        }
     }
         
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView(selection: $selection) {
+                OnboardingView().tag(0)
+                ContentView().tag(1)
+            }
+            .tabViewStyle(PageTabViewStyle())
+            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
         }
         .onChange(of: ScenePhase) { phase in
             // make sure all code is executed
@@ -65,3 +75,4 @@ struct Light_WakeupApp: App {
         }
     }
 }
+
