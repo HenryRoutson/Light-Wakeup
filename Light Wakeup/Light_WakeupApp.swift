@@ -11,7 +11,7 @@ import BackgroundTasks
 @main
 struct Light_WakeupApp: App {
     @Environment(\.scenePhase) var ScenePhase
-    @State var selection = 1
+    @AppStorage("selection") var selection = 2
     
     init() {
         
@@ -20,10 +20,8 @@ struct Light_WakeupApp: App {
         let hasLaunched = defaults.bool(forKey: hasLaunchedKey)
 
         if !hasLaunched {
-            selection = 0
             defaults.set(true, forKey: hasLaunchedKey)
             print("FILTER", #function)
-    
             // set default values
             defaults.set(Calendar.current.date(bySettingHour: 7, minute: 30, second: 0, of: Date())!, forKey: "WakeupTime")
             defaults.set(true, forKey: "WakeupToggle")
@@ -32,9 +30,10 @@ struct Light_WakeupApp: App {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
                 if granted == true && error == nil { print("FILTER Notifications permitted") }
             }
+            selection = 0
         }
         else {
-            print()
+            selection = 1
         }
     }
         
