@@ -52,7 +52,7 @@ struct OnboardingView: View {
                 .cornerRadius(30)
                 
                 
-                Text("\n'Do Not Disturb' stops alarms, so set it to turn off before when they are set.")
+                Text("\n'Do Not Disturb' stops alarms, so set it to turn off before when they are set. In this case the alarm should be after 7:30 am.")
                     .multilineTextAlignment(.center)
                     .padding([.top, .leading, .trailing])
                 
@@ -63,7 +63,7 @@ struct OnboardingView: View {
                                selection: .constant(Calendar.current.date(bySettingHour: 7, minute: 30, second: 0, of: Date())!),
                                displayedComponents: [.hourAndMinute])
                     DatePicker("To",
-                               selection: .constant(Date()),
+                               selection: .constant(Calendar.current.date(bySettingHour: 23, minute: 0, second: 0, of: Date())!),
                                displayedComponents: [.hourAndMinute])
                     Toggle(isOn: .constant(true) )  {Text("Dim Lock screen")}
                 }
