@@ -45,8 +45,7 @@ struct Light_WakeupApp: App {
         }
         .onChange(of: ScenePhase) { phase in
             // make sure all code is executed
-            var PhaseChangeBGTask = UIBackgroundTaskIdentifier(rawValue: 1)
-            PhaseChangeBGTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+            let PhaseChangeBGTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
             
             //NOTIFICATION WAKEUP
             
@@ -63,6 +62,7 @@ struct Light_WakeupApp: App {
                 // set alarm if needed
                 if ContentView().NotificationToggle == true {
                     // use background task to refresh notifications
+                    ContentView().UpdateWakeupTimeDay()
                     ContentView().Notifications_StartBGTask_ToCallSend()
                 }
             }

@@ -48,14 +48,16 @@ struct ContentView: View {
             }
     }
     
+    // important to optimize for battery usage
     func Notifications_StartBGTask_ToCallSend() {
+        print(#function)
         
         let NotificationBGTask = UIApplication.shared.beginBackgroundTask(expirationHandler: {
             print("FILTER expired")
             UIApplication.shared.endBackgroundTask(self.NotificationBGTask)
         })
 
-        // if date is before
+        // if date is not inside time period
         if Date() < WakeupTime {
             print("FILTER before")
             DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
@@ -73,11 +75,22 @@ struct ContentView: View {
                 Notifications_StartBGTask_ToCallSend()
             }
         }
-        
-        // if date is after
         else {
-            print("FILTER after")
             UIApplication.shared.endBackgroundTask(NotificationBGTask)
+        }
+        print(#function, "fin")
+    }
+    
+    func UpdateWakeupTimeDay() {
+        //update wakeupTime
+        let hour = Calendar.current.component(.hour, from: WakeupTime)
+        let min = Calendar.current.component(.minute, from: WakeupTime)
+        let todaysWakeupTime = Calendar.current.date(bySettingHour: hour, minute: min, second: 0, of: Date())!
+        // if wakeup time is past alarm time for today then, the next alarm time is tommorow
+        if todaysWakeupTime > Date() { //>
+            print(todaysWakeupTime)
+            WakeupTime = Calendar.current.date(byAdding: .day, value: 1, to: (todaysWakeupTime))!
+            print(WakeupTime)
         }
     }
 
@@ -93,7 +106,6 @@ struct ContentView: View {
                 .padding([.top, .leading, .trailing], 40.0)
                 .padding(.bottom, 10.0)
                 .onChange(of: WakeupTime) { _ in
-                    print(Calendar.current.date(bySettingHour: 7, minute: 30, second: 0, of: Date())!)
                     UserDefaults.standard.set(WakeupTime, forKey: "WakeupTime")
                 }
             
