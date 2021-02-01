@@ -23,6 +23,8 @@ struct Light_WakeupApp: App {
             defaults.set(true, forKey: hasLaunchedKey)
             print("FILTER", #function)
             
+            defaults.set(Calendar.current.date(bySettingHour: 7, minute: 30, second: 0, of: Date())!, forKey: "WakeupTime")
+            
             // ask for notification permission, if not already
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
                 if granted == true && error == nil { print("FILTER Notifications permitted") }
@@ -49,12 +51,10 @@ struct Light_WakeupApp: App {
             
             //NOTIFICATION WAKEUP
             
-            print("FILTER phase is \(ScenePhase)")
-            
             // if the app is turned off or on, remove old requests
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-            UIApplication.shared.endBackgroundTask(ContentView().NotificationBGTask) // not sure if this works
+            // end background task UpdateWakeupTimeDay
             
             // if the app is turned off, make requests with possibly new data 
             if phase == .background {
