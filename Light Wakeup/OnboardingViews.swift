@@ -68,13 +68,15 @@ struct OnboardingView: View {
                     Toggle(isOn: .constant(true) )  {Text("Dim Lock screen")}
                 }
                 .listStyle(GroupedListStyle())
-                .frame(minHeight: 260, maxHeight: 260)
+                .frame(minHeight: 300, maxHeight: 300)
                 .cornerRadius(30)
                 .padding(.bottom, 45)
                 .allowsHitTesting(false)
                 }
             }
+            .ignoresSafeArea(.all)
         }
+        .ignoresSafeArea(.all)
     }
 }
 

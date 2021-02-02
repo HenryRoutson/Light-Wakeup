@@ -17,7 +17,6 @@ struct ContentView: View {
     
     // Notification flash values
     @AppStorage("NotificationToggleStored") var NotificationToggle = true
-    @State var NotificationBGTask = UIBackgroundTaskIdentifier(rawValue: 0)
     
     // Notification flash functions
         
@@ -49,12 +48,11 @@ struct ContentView: View {
     }
     
     // important to optimize for battery usage
+    // don't use sleep() because
     func Notifications_StartBGTask_ToCallSend() {
-        print(#function)
         
         let NotificationBGTask = UIApplication.shared.beginBackgroundTask(expirationHandler: {
             print("FILTER expired")
-            UIApplication.shared.endBackgroundTask(self.NotificationBGTask)
         })
 
         // if date is not inside time period
@@ -78,7 +76,6 @@ struct ContentView: View {
         else {
             UIApplication.shared.endBackgroundTask(NotificationBGTask)
         }
-        print(#function, "fin")
     }
     
     func UpdateWakeupTimeDay() {
@@ -86,10 +83,10 @@ struct ContentView: View {
         let hour = Calendar.current.component(.hour, from: WakeupTime)
         let min = Calendar.current.component(.minute, from: WakeupTime)
         let todaysWakeupTime = Calendar.current.date(bySettingHour: hour, minute: min, second: 0, of: Date())!
-        // if wakeup time is past alarm time for today then, the next alarm time is tommorow
-        if todaysWakeupTime > Date() { //>
-            print(todaysWakeupTime)
-            WakeupTime = Calendar.current.date(byAdding: .day, value: 1, to: (todaysWakeupTime))!
+        // if the time has past for todays alarm, then the next alarm is tommorow
+        if todaysWakeupTime < Date() {
+            print(WakeupTime)
+            WakeupTime.addTimeInterval(60*60*24)
             print(WakeupTime)
         }
     }
@@ -120,8 +117,13 @@ struct ContentView: View {
                 .background(Color.black)
                 .cornerRadius(30)
                 .overlay(
-                    Capsule().stroke(Color.white, lineWidth: 1)
+                    Capsule()
+                        .stroke(Color.white, lineWidth: 10)
                         )
+                .overlay(
+                    Capsule().stroke(Color.black, lineWidth: 6)
+                        )
+                
                 .padding(.vertical, 50)
         }
     }
