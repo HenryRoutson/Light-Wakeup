@@ -39,7 +39,7 @@ struct OnboardingView: View {
                 .cornerRadius(30)
                 
                 
-                Text("\nTo turn LED flash off for a specific app, go into the app's permissions in settings and turn off notification sound.")
+                Text("\nTo turn LED alerts off for a specific app, go into the app's permissions in settings and turn off notification sound.")
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                 
@@ -52,7 +52,7 @@ struct OnboardingView: View {
                 .cornerRadius(30)
                 
                 
-                Text("\n'Do Not Disturb' stops alarms, so set it to turn off before when they are set. In this case the alarm should be after 7:30 am.")
+                Text("\n'Do Not Disturb' stops LED alerts, so set it to turn off before when they are set. In this case the alarm should be after 7:30 am.")
                     .multilineTextAlignment(.center)
                     .padding([.top, .leading, .trailing])
                 
