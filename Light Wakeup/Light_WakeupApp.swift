@@ -49,6 +49,9 @@ struct Light_WakeupApp: App {
             // make sure all code is executed
             let PhaseChangeBGTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
             
+            // save data
+            UserDefaults.standard.set(ContentView().WakeupTime, forKey: "WakeupTime")
+            
             //NOTIFICATION WAKEUP
             
             // if the app is turned off or on, remove old requests

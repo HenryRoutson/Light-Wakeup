@@ -71,9 +71,6 @@ struct ContentView: View {
                        displayedComponents: [.hourAndMinute])
                 .padding([.top, .leading, .trailing], 40.0)
                 .padding(.bottom, 10.0)
-                .onChange(of: WakeupTime) { _ in
-                    UserDefaults.standard.set(WakeupTime, forKey: "WakeupTime")
-                }
             
             Toggle("On/Off", isOn: $NotificationToggle)
                 .padding(.horizontal, 80.0)
