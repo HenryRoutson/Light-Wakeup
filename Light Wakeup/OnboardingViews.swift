@@ -72,6 +72,7 @@ struct OnboardingView: View {
                 .allowsHitTesting(false)
                 
                 Text("\nLastly, this alarm may not fully wake you up, so make sure to have another backup alarm that can.\n\n\n\n\n")
+                    .padding()
             }
             .ignoresSafeArea(.all)
         }
