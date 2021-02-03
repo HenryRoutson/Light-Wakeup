@@ -34,7 +34,7 @@ struct ContentView: View {
         
         // create loop to schedule sequential notifications
         // note that if more than 64 or 2^6 notifications are created, old the latest scheduled will be shown
-        var NotificationTime = Date(timeInterval: 5, since: Date())
+        var NotificationTime = Date(timeInterval: 5, since: WakeupTime)
         for _ in 1...64 {
             let dateMatching = Calendar.current.dateComponents([.hour, .minute, .second], from: NotificationTime)
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: true)
@@ -43,21 +43,8 @@ struct ContentView: View {
             
             // create time seperation between notifications
             // Note that shorter time intervals can stop vibration
-            NotificationTime = Date(timeInterval: 3, since: NotificationTime)
+            NotificationTime = Date(timeInterval: 10, since: NotificationTime)
             }
-    }
-    
-    func UpdateWakeupTimeDay() {
-        //update wakeupTime
-        let hour = Calendar.current.component(.hour, from: WakeupTime)
-        let min = Calendar.current.component(.minute, from: WakeupTime)
-        let todaysWakeupTime = Calendar.current.date(bySettingHour: hour, minute: min, second: 0, of: Date())!
-        // if the time has past for todays alarm, then the next alarm is tommorow
-        if todaysWakeupTime < Date() {
-            print(WakeupTime)
-            // to get working
-            print(WakeupTime)
-        }
     }
 
     var body: some View {
@@ -71,6 +58,9 @@ struct ContentView: View {
                        displayedComponents: [.hourAndMinute])
                 .padding([.top, .leading, .trailing], 40.0)
                 .padding(.bottom, 10.0)
+                .onChange(of: WakeupTime) { (_) in
+                    UserDefaults.standard.set(WakeupTime, forKey: "WakeupTime")
+                }
             
             Toggle("On/Off", isOn: $NotificationToggle)
                 .padding(.horizontal, 80.0)

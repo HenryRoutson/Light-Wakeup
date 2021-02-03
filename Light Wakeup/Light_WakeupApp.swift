@@ -49,15 +49,11 @@ struct Light_WakeupApp: App {
             // make sure all code is executed
             let PhaseChangeBGTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
             
-            // save data
-            UserDefaults.standard.set(ContentView().WakeupTime, forKey: "WakeupTime")
-            
             //NOTIFICATION WAKEUP
             
             // if the app is turned off or on, remove old requests
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-            // end background task UpdateWakeupTimeDay
             
             // if the app is turned off, make requests with possibly new data 
             if phase == .background {
@@ -65,7 +61,6 @@ struct Light_WakeupApp: App {
                 // set alarm if needed
                 if ContentView().NotificationToggle == true {
                     // use background task to refresh notifications
-                    ContentView().UpdateWakeupTimeDay()
                     ContentView().Notification_schedule()
                 }
             }

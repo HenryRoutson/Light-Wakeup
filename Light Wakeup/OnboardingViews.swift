@@ -59,10 +59,10 @@ struct OnboardingView: View {
                 List {
                     Toggle(isOn: .constant(true) ) {Text("Scheduled")}
                     DatePicker("From",
-                               selection: .constant(Calendar.current.date(bySettingHour: 7, minute: 30, second: 0, of: Date())!),
+                               selection: .constant(Calendar.current.date(bySettingHour: 23, minute: 0, second: 0, of: Date())!),
                                displayedComponents: [.hourAndMinute])
                     DatePicker("To",
-                               selection: .constant(Calendar.current.date(bySettingHour: 23, minute: 0, second: 0, of: Date())!),
+                               selection: .constant(Calendar.current.date(bySettingHour: 7, minute: 30, second: 0, of: Date())!),
                                displayedComponents: [.hourAndMinute])
                     Toggle(isOn: .constant(true) )  {Text("Dim Lock screen")}
                 }
