@@ -20,7 +20,7 @@ struct ContentView: View {
     
     // Notification flash functions
         
-    func Notifications_Send() {
+    func Notification_schedule() {
         
         // remove old notifications
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
@@ -29,8 +29,8 @@ struct ContentView: View {
         //define notification
         let content = UNMutableNotificationContent()
         content.title = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
-        content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.0)
         content.body = NSString.localizedUserNotificationString(forKey: "Click on this notification to stop more", arguments: nil)
+        content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.1)
         
         // create loop to schedule sequential notifications
         // note that if more than 64 or 2^6 notifications are created, old the latest scheduled will be shown
@@ -43,39 +43,8 @@ struct ContentView: View {
             
             // create time seperation between notifications
             // Note that shorter time intervals can stop vibration
-            NotificationTime = Date(timeInterval: 0.5, since: NotificationTime)
+            NotificationTime = Date(timeInterval: 3, since: NotificationTime)
             }
-    }
-    
-    // important to optimize for battery usage
-    // don't use sleep() because
-    func Notifications_StartBGTask_ToCallSend() {
-        
-        let NotificationBGTask = UIApplication.shared.beginBackgroundTask(expirationHandler: {
-            print("FILTER expired")
-        })
-
-        // if date is not inside time period
-        if Date() < WakeupTime {
-            print("FILTER before")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
-                UIApplication.shared.endBackgroundTask(NotificationBGTask)
-                Notifications_StartBGTask_ToCallSend()
-            }
-        }
-        
-        // if date is inside
-        else if Date() < WakeupTime.addingTimeInterval(TimeInterval(WakeupDuration*60)) {
-            print("FILTER inside")
-            Notifications_Send()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
-                UIApplication.shared.endBackgroundTask(NotificationBGTask)
-                Notifications_StartBGTask_ToCallSend()
-            }
-        }
-        else {
-            UIApplication.shared.endBackgroundTask(NotificationBGTask)
-        }
     }
     
     func UpdateWakeupTimeDay() {
@@ -86,7 +55,7 @@ struct ContentView: View {
         // if the time has past for todays alarm, then the next alarm is tommorow
         if todaysWakeupTime < Date() {
             print(WakeupTime)
-            WakeupTime.addTimeInterval(60*60*24)
+            // to get working
             print(WakeupTime)
         }
     }
@@ -110,21 +79,18 @@ struct ContentView: View {
                 .padding(.horizontal, 80.0)
                 .padding(.bottom, 100.0)
             
-            Link("       Feedback       ",
-                 destination: URL(string: "mailto:yry1f6aq@anonaddy.me")!)
+            Link(destination: URL(string: "mailto:yry1f6aq@anonaddy.me")!) {
+                Text("     Feedback     ")
+            }
                 .foregroundColor(.white)
                 .padding(.all)
                 .background(Color.black)
-                .cornerRadius(30)
+                .clipShape(Capsule())
                 .overlay(
                     Capsule()
-                        .stroke(Color.white, lineWidth: 10)
+                        .stroke(Color.white, lineWidth: 2)
                         )
-                .overlay(
-                    Capsule().stroke(Color.black, lineWidth: 6)
-                        )
-                
-                .padding(.vertical, 50)
+                .padding(.bottom, 70)
         }
     }
 }
@@ -132,5 +98,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .preferredColorScheme(.dark)
     }
 }

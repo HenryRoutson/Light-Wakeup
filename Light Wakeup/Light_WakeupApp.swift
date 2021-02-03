@@ -63,7 +63,7 @@ struct Light_WakeupApp: App {
                 if ContentView().NotificationToggle == true {
                     // use background task to refresh notifications
                     ContentView().UpdateWakeupTimeDay()
-                    ContentView().Notifications_StartBGTask_ToCallSend()
+                    ContentView().Notification_schedule()
                 }
             }
             // signal that code has run

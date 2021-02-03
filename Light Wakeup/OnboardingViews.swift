@@ -35,7 +35,7 @@ struct OnboardingView: View {
                         Toggle(isOn: .constant(true) )  {Text("Flash on silent")}
                 }
                 .listStyle(GroupedListStyle())
-                .frame(minHeight: 160, maxHeight: 160)
+                .frame(minHeight: 160, maxHeight: 250)
                 .cornerRadius(30)
                 
                 
@@ -56,7 +56,6 @@ struct OnboardingView: View {
                     .multilineTextAlignment(.center)
                     .padding([.top, .leading, .trailing])
                 
-                ZStack {
                 List {
                     Toggle(isOn: .constant(true) ) {Text("Scheduled")}
                     DatePicker("From",
@@ -68,11 +67,11 @@ struct OnboardingView: View {
                     Toggle(isOn: .constant(true) )  {Text("Dim Lock screen")}
                 }
                 .listStyle(GroupedListStyle())
-                .frame(minHeight: 300, maxHeight: 300)
+                .frame(minHeight: 300, maxHeight: .infinity)
                 .cornerRadius(30)
-                .padding(.bottom, 45)
                 .allowsHitTesting(false)
-                }
+                
+                Text("\nLastly, this alarm may not fully wake you up, so make sure to have another backup alarm that can.\n\n\n\n\n")
             }
             .ignoresSafeArea(.all)
         }
