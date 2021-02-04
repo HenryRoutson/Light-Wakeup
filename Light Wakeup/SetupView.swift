@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnboardingView: View {
+struct SetupView: View {
     @AppStorage("OnboardingViewShown") var OnboardingViewShown = false
     
     var body: some View {
@@ -77,16 +77,13 @@ struct OnboardingView: View {
                 Text("\nLastly, this alarm may not fully wake you up, so make sure to have another backup alarm that can.\n\n\n\n\n")
                     .padding()
             }
-            .ignoresSafeArea(.all)
         }
-        .ignoresSafeArea(.all)
     }
 }
 
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView()
-            .preferredColorScheme(.light)
+        SetupView()
     }
 }

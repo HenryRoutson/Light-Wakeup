@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA5CBD0E25C4F2B300E7235D /* OnboardingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CBD0D25C4F2B300E7235D /* OnboardingViews.swift */; };
+		BA5CBD0E25C4F2B300E7235D /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CBD0D25C4F2B300E7235D /* SetupView.swift */; };
 		BAEA45DD25A42E5E002BCAF1 /* Light_WakeupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEA45DC25A42E5E002BCAF1 /* Light_WakeupApp.swift */; };
 		BAEA45DF25A42E5E002BCAF1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEA45DE25A42E5E002BCAF1 /* ContentView.swift */; };
 		BAEA45E125A42E61002BCAF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAEA45E025A42E61002BCAF1 /* Assets.xcassets */; };
@@ -15,7 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BA5CBD0D25C4F2B300E7235D /* OnboardingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViews.swift; sourceTree = "<group>"; };
+		BA5CBD0D25C4F2B300E7235D /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
 		BAA5F03B25B904CF001A8CC6 /* Light WakeupRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Light WakeupRelease.entitlements"; sourceTree = "<group>"; };
 		BAEA45D925A42E5E002BCAF1 /* Light Wakeup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Light Wakeup.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAEA45DC25A42E5E002BCAF1 /* Light_WakeupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light_WakeupApp.swift; sourceTree = "<group>"; };
@@ -57,8 +57,8 @@
 			children = (
 				BAA5F03B25B904CF001A8CC6 /* Light WakeupRelease.entitlements */,
 				BAEA45DC25A42E5E002BCAF1 /* Light_WakeupApp.swift */,
-				BA5CBD0D25C4F2B300E7235D /* OnboardingViews.swift */,
 				BAEA45DE25A42E5E002BCAF1 /* ContentView.swift */,
+				BA5CBD0D25C4F2B300E7235D /* SetupView.swift */,
 				BAEA45E025A42E61002BCAF1 /* Assets.xcassets */,
 				BAEA45E525A42E61002BCAF1 /* Info.plist */,
 				BAEA45E225A42E61002BCAF1 /* Preview Content */,
@@ -145,7 +145,7 @@
 			files = (
 				BAEA45DF25A42E5E002BCAF1 /* ContentView.swift in Sources */,
 				BAEA45DD25A42E5E002BCAF1 /* Light_WakeupApp.swift in Sources */,
-				BA5CBD0E25C4F2B300E7235D /* OnboardingViews.swift in Sources */,
+				BA5CBD0E25C4F2B300E7235D /* SetupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
