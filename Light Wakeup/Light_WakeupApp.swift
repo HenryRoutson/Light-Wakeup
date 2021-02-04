@@ -7,6 +7,8 @@
 
 import SwiftUI
 import BackgroundTasks
+import UserNotifications
+
 
 @main
 struct Light_WakeupApp: App {
@@ -58,13 +60,14 @@ struct Light_WakeupApp: App {
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             UNUserNotificationCenter.current().removeAllDeliveredNotifications()
             
-            // if the app is turned off, make requests with possibly new data 
+            // if the app is turned off, make requests with possibly new data
             if phase == .background {
                 
-                // and set alarm if needed
+                // set alarm if needed
                 if InputView().NotificationToggle == true {
                     Notification_schedule()
                 }
+                
             }
             // signal that code has run
             UIApplication.shared.endBackgroundTask(PhaseChangeBGTask)

@@ -4,8 +4,6 @@
 //
 
 import SwiftUI
-import UserNotifications
-import BackgroundTasks
 
 struct InputView: View {
 
