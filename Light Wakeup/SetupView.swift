@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SetupView: View {
-    @AppStorage("OnboardingViewShown") var OnboardingViewShown = false
     
     var body: some View {
         ScrollView {
@@ -80,7 +79,6 @@ struct SetupView: View {
         }
     }
 }
-
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {

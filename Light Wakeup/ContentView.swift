@@ -43,7 +43,6 @@ struct ContentView: View {
                         .stroke(Color.white, lineWidth: 2)
                         )
                 .padding(.bottom, 70)
-            
         }
     }
 }
