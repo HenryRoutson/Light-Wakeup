@@ -71,6 +71,9 @@ struct OnboardingView: View {
                 .cornerRadius(30)
                 .allowsHitTesting(false)
                 
+                Text("\nThis app works wakes you up most gradually in silent mode with the ringer off, so flip the switch to turn it off.")
+                    .padding()
+                
                 Text("\nLastly, this alarm may not fully wake you up, so make sure to have another backup alarm that can.\n\n\n\n\n")
                     .padding()
             }

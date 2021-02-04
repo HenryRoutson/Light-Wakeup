@@ -21,13 +21,12 @@ struct Light_WakeupApp: App {
 
         if !hasLaunched {
             defaults.set(true, forKey: hasLaunchedKey)
-            print("FILTER", #function)
             
             defaults.set(Calendar.current.date(bySettingHour: 7, minute: 30, second: 0, of: Date())!, forKey: "WakeupTime")
             
             // ask for notification permission, if not already
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
-                if granted == true && error == nil { print("FILTER Notifications permitted") }
+                if granted == true && error == nil { print("Notifications permitted") }
             }
             selection = 0
         }
@@ -61,7 +60,7 @@ struct Light_WakeupApp: App {
                 // set alarm if needed
                 if ContentView().NotificationToggle == true {
                     // use background task to refresh notifications
-                    ContentView().Notification_schedule()
+                    Notification_schedule()
                 }
             }
             // signal that code has run
@@ -70,3 +69,26 @@ struct Light_WakeupApp: App {
     }
 }
 
+func Notification_schedule() {
+    
+    //define notification
+    let content = UNMutableNotificationContent()
+    content.title = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
+    content.body = NSString.localizedUserNotificationString(forKey: "Click on this notification to stop more", arguments: nil)
+    content.sound = UNNotificationSound.default
+    
+    // create loop to schedule sequential notifications
+    // note that if more than 64 or 2^6 notifications are created, old the latest scheduled will be shown
+    var NotificationTime = Date(timeInterval: 5, since: ContentView().WakeupTime)
+    for _ in 1...64 {
+        
+        let dateMatching = Calendar.current.dateComponents([.hour, .minute, .second], from: NotificationTime)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: true)
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request)
+        
+        // create time seperation between notifications
+        NotificationTime = Date(timeInterval: 10, since: NotificationTime)
+   
+    }
+}

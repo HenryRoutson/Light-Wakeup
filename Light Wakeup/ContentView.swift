@@ -8,44 +8,9 @@ import UserNotifications
 import BackgroundTasks
 
 struct ContentView: View {
-    
-    // Universal
+
     @State var WakeupTime = UserDefaults.standard.object(forKey: "WakeupTime")! as! Date
-    @State var WakeupDuration = 30 // in minutes
-    
-    // NOTIFICATION WAKEUP
-    
-    // Notification flash values
     @AppStorage("NotificationToggleStored") var NotificationToggle = true
-    
-    // Notification flash functions
-        
-    func Notification_schedule() {
-        
-        // remove old notifications
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-        
-        //define notification
-        let content = UNMutableNotificationContent()
-        content.title = NSString.localizedUserNotificationString(forKey: "Wake Up!", arguments: nil)
-        content.body = NSString.localizedUserNotificationString(forKey: "Click on this notification to stop more", arguments: nil)
-        content.sound = UNNotificationSound.defaultCriticalSound(withAudioVolume: 0.1)
-        
-        // create loop to schedule sequential notifications
-        // note that if more than 64 or 2^6 notifications are created, old the latest scheduled will be shown
-        var NotificationTime = Date(timeInterval: 5, since: WakeupTime)
-        for _ in 1...64 {
-            let dateMatching = Calendar.current.dateComponents([.hour, .minute, .second], from: NotificationTime)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: true)
-            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-            UNUserNotificationCenter.current().add(request)
-            
-            // create time seperation between notifications
-            // Note that shorter time intervals can stop vibration
-            NotificationTime = Date(timeInterval: 10, since: NotificationTime)
-            }
-    }
 
     var body: some View {
         
@@ -78,6 +43,7 @@ struct ContentView: View {
                         .stroke(Color.white, lineWidth: 2)
                         )
                 .padding(.bottom, 70)
+            
         }
     }
 }
