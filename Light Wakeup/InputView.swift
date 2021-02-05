@@ -7,7 +7,7 @@ import SwiftUI
 import UserNotifications
 import BackgroundTasks
 
-struct ContentView: View {
+struct InputView: View {
 
     @State var WakeupTime = UserDefaults.standard.object(forKey: "WakeupTime")! as! Date
     @AppStorage("NotificationToggleStored") var NotificationToggle = true
@@ -50,7 +50,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-            .preferredColorScheme(.dark)
+        InputView()
     }
 }

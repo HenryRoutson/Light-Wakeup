@@ -38,8 +38,8 @@ struct Light_WakeupApp: App {
     var body: some Scene {
         WindowGroup {
             TabView(selection: $selection) {
-                OnboardingView().tag(0)
-                ContentView().tag(1)
+                SetupView().tag(0)
+                InputView().tag(1)
             }
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
@@ -58,7 +58,7 @@ struct Light_WakeupApp: App {
             if phase == .background {
                 
                 // set alarm if needed
-                if ContentView().NotificationToggle == true {
+                if InputView().NotificationToggle == true {
                     // use background task to refresh notifications
                     Notification_schedule()
                 }
@@ -79,7 +79,7 @@ func Notification_schedule() {
     
     // create loop to schedule sequential notifications
     // note that if more than 64 or 2^6 notifications are created, old the latest scheduled will be shown
-    var NotificationTime = Date(timeInterval: 5, since: ContentView().WakeupTime)
+    var NotificationTime = Date(timeInterval: 5, since: InputView().WakeupTime)
     for _ in 1...64 {
         
         let dateMatching = Calendar.current.dateComponents([.hour, .minute, .second], from: NotificationTime)

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnboardingView: View {
+struct SetupView: View {
     @AppStorage("OnboardingViewShown") var OnboardingViewShown = false
     
     var body: some View {
@@ -86,7 +86,7 @@ struct OnboardingView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView()
+        SetupView()
             .preferredColorScheme(.light)
     }
 }
