@@ -7,6 +7,8 @@
 
 import SwiftUI
 import BackgroundTasks
+import UserNotifications
+
 
 @main
 struct Light_WakeupApp: App {
@@ -15,18 +17,21 @@ struct Light_WakeupApp: App {
     
     init() {
         
+        // Seperates first and later launches
         let hasLaunchedKey = "HasLaunched"
         let defaults = UserDefaults.standard
         let hasLaunched = defaults.bool(forKey: hasLaunchedKey)
-
         if !hasLaunched {
             defaults.set(true, forKey: hasLaunchedKey)
             
+            // sets default for wakeuptime
             defaults.set(Calendar.current.date(bySettingHour: 7, minute: 30, second: 0, of: Date())!, forKey: "WakeupTime")
             
-            // ask for notification permission, if not already
+            // asks for notification permission, if it has not already
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
                 if granted == true && error == nil { print("Notifications permitted") }
+              
+            // sets section that the user opens the app on, first the setup, then main
             }
             selection = 0
         }
@@ -38,13 +43,14 @@ struct Light_WakeupApp: App {
     var body: some Scene {
         WindowGroup {
             TabView(selection: $selection) {
-                OnboardingView().tag(0)
-                ContentView().tag(1)
+                SetupView().tag(0)
+                InputView().tag(1)
             }
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
         }
         .onChange(of: ScenePhase) { phase in
+            
             // make sure all code is executed
             let PhaseChangeBGTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
             
@@ -54,14 +60,14 @@ struct Light_WakeupApp: App {
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             UNUserNotificationCenter.current().removeAllDeliveredNotifications()
             
-            // if the app is turned off, make requests with possibly new data 
+            // if the app is turned off, make requests with possibly new data
             if phase == .background {
                 
                 // set alarm if needed
-                if ContentView().NotificationToggle == true {
-                    // use background task to refresh notifications
+                if InputView().NotificationToggle == true {
                     Notification_schedule()
                 }
+                
             }
             // signal that code has run
             UIApplication.shared.endBackgroundTask(PhaseChangeBGTask)
@@ -79,9 +85,10 @@ func Notification_schedule() {
     
     // create loop to schedule sequential notifications
     // note that if more than 64 or 2^6 notifications are created, old the latest scheduled will be shown
-    var NotificationTime = Date(timeInterval: 5, since: ContentView().WakeupTime)
+    var NotificationTime = Date(timeInterval: 5, since: InputView().WakeupTime)
     for _ in 1...64 {
         
+        // define time for each notification
         let dateMatching = Calendar.current.dateComponents([.hour, .minute, .second], from: NotificationTime)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: true)
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
