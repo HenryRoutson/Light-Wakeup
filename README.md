@@ -1,7 +1,7 @@
 # Light-Wakeup
 FOSS IOS Light alarm app
 
-FUTURE UPDATES - 
+PUBLISH UPDATE - 
   Add in silent background notifications with firebase to increase LED flash frequency and silence vibrations.
   
 
