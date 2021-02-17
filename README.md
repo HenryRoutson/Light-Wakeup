@@ -6,7 +6,7 @@ PUBLISH UPDATE -
   
 
 APP STORE DESCRIPTION - 
-  An alarm that allows you to wake up gradually.
+  An alarm that allows you to gradually wake up.
   Free and open source software (FOSS).
   https://github.com/HenryRoutson/Light-Wakeup
   
