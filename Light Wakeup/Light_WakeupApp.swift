@@ -20,8 +20,8 @@ struct Light_WakeupApp: App {
         let hasLaunched = defaults.bool(forKey: hasLaunchedKey)
 
         if !hasLaunched {
-            defaults.set(true, forKey: hasLaunchedKey)
             
+            defaults.set(true, forKey: hasLaunchedKey)
             defaults.set(Calendar.current.date(bySettingHour: 7, minute: 30, second: 0, of: Date())!, forKey: "WakeupTime")
             
             // ask for notification permission, if not already
