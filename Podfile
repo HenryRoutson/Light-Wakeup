@@ -10,5 +10,6 @@ target 'Light Wakeup' do
   # add pods for desired Firebase products
   # https://firebase.google.com/docs/ios/setup#available-pods
   pod 'Firebase/Messaging'
+  pod 'Firebase/Analytics'
 
 end

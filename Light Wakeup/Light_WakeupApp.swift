@@ -7,7 +7,9 @@
 
 import SwiftUI
 import BackgroundTasks
+
 import Firebase
+import FirebaseMessaging
 
 @main
 struct Light_WakeupApp: App {
