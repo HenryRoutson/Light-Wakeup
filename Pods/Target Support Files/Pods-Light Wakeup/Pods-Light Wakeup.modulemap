@@ -1,0 +1,6 @@
+framework module Pods_Light_Wakeup {
+  umbrella header "Pods-Light Wakeup-umbrella.h"
+
+  export *
+  module * { export * }
+}

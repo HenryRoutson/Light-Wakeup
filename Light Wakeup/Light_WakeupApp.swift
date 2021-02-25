@@ -7,6 +7,7 @@
 
 import SwiftUI
 import BackgroundTasks
+import Firebase
 
 @main
 struct Light_WakeupApp: App {
@@ -20,17 +21,23 @@ struct Light_WakeupApp: App {
         let hasLaunched = defaults.bool(forKey: hasLaunchedKey)
 
         if !hasLaunched {
-            defaults.set(true, forKey: hasLaunchedKey)
             
+            // Set default values
+            defaults.set(true, forKey: hasLaunchedKey)
             defaults.set(Calendar.current.date(bySettingHour: 7, minute: 30, second: 0, of: Date())!, forKey: "WakeupTime")
             
-            // ask for notification permission, if not already
+            // configure firebase
+            FirebaseApp.configure()
+            
+            // ask for notification permission
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
                 if granted == true && error == nil { print("Notifications permitted") }
             }
+            // select SetupView on first open
             ViewSelection = "SetupView"
         }
         else {
+            // select InputView if the app has been seen SetupView before
             ViewSelection = "InputView"
         }
     }
