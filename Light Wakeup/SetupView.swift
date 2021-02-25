@@ -69,7 +69,6 @@ struct SetupView: View {
                 .listStyle(GroupedListStyle())
                 .frame(minHeight: 300, maxHeight: .infinity)
                 .cornerRadius(30)
-                .allowsHitTesting(false)
                 
                 Text("\nThis app works wakes you up most gradually in silent mode with the ringer off, so flip the switch to turn it off.")
                     .padding()
