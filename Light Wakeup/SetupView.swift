@@ -87,6 +87,5 @@ struct SetupView: View {
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
         SetupView()
-            .preferredColorScheme(.light)
     }
 }

@@ -11,7 +11,7 @@ import BackgroundTasks
 @main
 struct Light_WakeupApp: App {
     @Environment(\.scenePhase) var ScenePhase
-    @AppStorage("selection") var selection = 2
+    @AppStorage("ViewSelection") var ViewSelection = "Nill"
     
     init() {
         
@@ -20,26 +20,26 @@ struct Light_WakeupApp: App {
         let hasLaunched = defaults.bool(forKey: hasLaunchedKey)
 
         if !hasLaunched {
-            
             defaults.set(true, forKey: hasLaunchedKey)
+            
             defaults.set(Calendar.current.date(bySettingHour: 7, minute: 30, second: 0, of: Date())!, forKey: "WakeupTime")
             
             // ask for notification permission, if not already
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
                 if granted == true && error == nil { print("Notifications permitted") }
             }
-            selection = 0
+            ViewSelection = "SetupView"
         }
         else {
-            selection = 1
+            ViewSelection = "InputView"
         }
     }
         
     var body: some Scene {
         WindowGroup {
-            TabView(selection: $selection) {
-                SetupView().tag(0)
-                InputView().tag(1)
+            TabView(selection: $ViewSelection) {
+                SetupView().tag("SetupView")
+                InputView().tag("InputView")
             }
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
