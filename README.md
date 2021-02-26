@@ -1,5 +1,5 @@
 # Light-Wakeup
-FOSS IOS Light alarm app
+FOSS IOS Light alarm app written with SwiftUI 2.0
 
 PUBLISH UPDATE - 
   Add in silent background notifications with firebase to increase LED flash frequency and silence vibrations.
