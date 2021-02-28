@@ -3,12 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		51F6C93687AE6D60C5C44657 /* Pods_Light_Wakeup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B126E31FB3590279B125A6B /* Pods_Light_Wakeup.framework */; };
 		BA5CBD0E25C4F2B300E7235D /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CBD0D25C4F2B300E7235D /* SetupView.swift */; };
+		BACACFEA25E8F80B0029E776 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BACACFE925E8F80B0029E776 /* GoogleService-Info.plist */; };
 		BAEA45DD25A42E5E002BCAF1 /* Light_WakeupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEA45DC25A42E5E002BCAF1 /* Light_WakeupApp.swift */; };
 		BAEA45DF25A42E5E002BCAF1 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEA45DE25A42E5E002BCAF1 /* InputView.swift */; };
 		BAEA45E125A42E61002BCAF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAEA45E025A42E61002BCAF1 /* Assets.xcassets */; };
@@ -16,17 +16,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0B126E31FB3590279B125A6B /* Pods_Light_Wakeup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Light_Wakeup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A949B255A91455583998DA0A /* Pods-Light Wakeup.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Light Wakeup.debug.xcconfig"; path = "Target Support Files/Pods-Light Wakeup/Pods-Light Wakeup.debug.xcconfig"; sourceTree = "<group>"; };
 		BA5CBD0D25C4F2B300E7235D /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
 		BAA5F03B25B904CF001A8CC6 /* Light WakeupRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Light WakeupRelease.entitlements"; sourceTree = "<group>"; };
+		BACACFE925E8F80B0029E776 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BAEA45D925A42E5E002BCAF1 /* Light Wakeup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Light Wakeup.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAEA45DC25A42E5E002BCAF1 /* Light_WakeupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light_WakeupApp.swift; sourceTree = "<group>"; };
 		BAEA45DE25A42E5E002BCAF1 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		BAEA45E025A42E61002BCAF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BAEA45E325A42E61002BCAF1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BAEA45E525A42E61002BCAF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FB2A5ABA42C6FB9EAC5C9585 /* Pods-Light Wakeup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Light Wakeup.release.xcconfig"; path = "Target Support Files/Pods-Light Wakeup/Pods-Light Wakeup.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,7 +32,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51F6C93687AE6D60C5C44657 /* Pods_Light_Wakeup.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,7 +41,6 @@
 		6FDA2AA6679BDBD8F817C916 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0B126E31FB3590279B125A6B /* Pods_Light_Wakeup.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -54,7 +50,6 @@
 			children = (
 				BAEA45DB25A42E5E002BCAF1 /* Light Wakeup */,
 				BAEA45DA25A42E5E002BCAF1 /* Products */,
-				FF2A1D258ADBCDCFA735CDE6 /* Pods */,
 				6FDA2AA6679BDBD8F817C916 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -76,6 +71,7 @@
 				BAEA45DE25A42E5E002BCAF1 /* InputView.swift */,
 				BAEA45E025A42E61002BCAF1 /* Assets.xcassets */,
 				BAEA45E525A42E61002BCAF1 /* Info.plist */,
+				BACACFE925E8F80B0029E776 /* GoogleService-Info.plist */,
 				BAEA45E225A42E61002BCAF1 /* Preview Content */,
 			);
 			path = "Light Wakeup";
@@ -87,16 +83,6 @@
 				BAEA45E325A42E61002BCAF1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		FF2A1D258ADBCDCFA735CDE6 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A949B255A91455583998DA0A /* Pods-Light Wakeup.debug.xcconfig */,
-				FB2A5ABA42C6FB9EAC5C9585 /* Pods-Light Wakeup.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,6 +146,7 @@
 			files = (
 				BAEA45E425A42E61002BCAF1 /* Preview Assets.xcassets in Resources */,
 				BAEA45E125A42E61002BCAF1 /* Assets.xcassets in Resources */,
+				BACACFEA25E8F80B0029E776 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,7 +326,6 @@
 		};
 		BAEA45E925A42E61002BCAF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A949B255A91455583998DA0A /* Pods-Light Wakeup.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -362,7 +348,6 @@
 		};
 		BAEA45EA25A42E61002BCAF1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FB2A5ABA42C6FB9EAC5C9585 /* Pods-Light Wakeup.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -8,11 +8,9 @@
 import SwiftUI
 import BackgroundTasks
 
-import Firebase
-import FirebaseMessaging
-
 @main
 struct Light_WakeupApp: App {
+    
     @Environment(\.scenePhase) var ScenePhase
     @AppStorage("ViewSelection") var ViewSelection = "Nill"
     
@@ -23,14 +21,11 @@ struct Light_WakeupApp: App {
         let hasLaunched = defaults.bool(forKey: hasLaunchedKey)
 
         if !hasLaunched {
-            
-            // Set default values
+        
+            // Set default UI element values
             defaults.set(true, forKey: hasLaunchedKey)
             defaults.set(Calendar.current.date(bySettingHour: 7, minute: 30, second: 0, of: Date())!, forKey: "WakeupTime")
-            
-            // configure firebase
-            FirebaseApp.configure()
-            
+        
             // ask for notification permission
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
                 if granted == true && error == nil { print("Notifications permitted") }

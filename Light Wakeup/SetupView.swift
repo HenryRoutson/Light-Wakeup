@@ -16,14 +16,11 @@ struct SetupView: View {
             VStack {
                 
                 HStack {
-                    
                     Text("Setup")
                         .font(.title)
                         .fontWeight(.black)
                         .padding([.top, .leading, .trailing])
-                    
                     Spacer()
-                
                 }
                 
                 Text("\n\nThis app uses 'LED flash' alerts. Search for this in settings and turn it on.")
