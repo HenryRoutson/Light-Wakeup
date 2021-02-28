@@ -7,6 +7,7 @@
 
 import SwiftUI
 import BackgroundTasks
+import Firebase
 
 @main
 struct Light_WakeupApp: App {
@@ -15,6 +16,8 @@ struct Light_WakeupApp: App {
     @AppStorage("ViewSelection") var ViewSelection = "Nill"
     
     init() {
+        
+        FirebaseApp.configure()
         
         let hasLaunchedKey = "HasLaunched"
         let defaults = UserDefaults.standard

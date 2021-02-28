@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA20353925EBA15300C602D8 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = BA20353825EBA15300C602D8 /* FirebaseMessaging */; };
 		BA5CBD0E25C4F2B300E7235D /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CBD0D25C4F2B300E7235D /* SetupView.swift */; };
 		BACACFEA25E8F80B0029E776 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BACACFE925E8F80B0029E776 /* GoogleService-Info.plist */; };
 		BAEA45DD25A42E5E002BCAF1 /* Light_WakeupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEA45DC25A42E5E002BCAF1 /* Light_WakeupApp.swift */; };
@@ -32,25 +33,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA20353925EBA15300C602D8 /* FirebaseMessaging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6FDA2AA6679BDBD8F817C916 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		BAEA45D025A42E5E002BCAF1 = {
 			isa = PBXGroup;
 			children = (
 				BAEA45DB25A42E5E002BCAF1 /* Light Wakeup */,
 				BAEA45DA25A42E5E002BCAF1 /* Products */,
-				6FDA2AA6679BDBD8F817C916 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,17 +86,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BAEA45E825A42E61002BCAF1 /* Build configuration list for PBXNativeTarget "Light Wakeup" */;
 			buildPhases = (
-				38266E900F6A6E0F2F0017C9 /* [CP] Check Pods Manifest.lock */,
 				BAEA45D525A42E5E002BCAF1 /* Sources */,
 				BAEA45D625A42E5E002BCAF1 /* Frameworks */,
 				BAEA45D725A42E5E002BCAF1 /* Resources */,
-				050C781F1EA574D8CAD63F39 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Light Wakeup";
+			packageProductDependencies = (
+				BA20353825EBA15300C602D8 /* FirebaseMessaging */,
+			);
 			productName = "Light Wakeup";
 			productReference = BAEA45D925A42E5E002BCAF1 /* Light Wakeup.app */;
 			productType = "com.apple.product-type.application";
@@ -130,6 +125,9 @@
 				Base,
 			);
 			mainGroup = BAEA45D025A42E5E002BCAF1;
+			packageReferences = (
+				BA20353725EBA15300C602D8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = BAEA45DA25A42E5E002BCAF1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -151,48 +149,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		050C781F1EA574D8CAD63F39 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Light Wakeup/Pods-Light Wakeup-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Light Wakeup/Pods-Light Wakeup-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Light Wakeup/Pods-Light Wakeup-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		38266E900F6A6E0F2F0017C9 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Light Wakeup-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BAEA45D525A42E5E002BCAF1 /* Sources */ = {
@@ -263,6 +219,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -317,6 +274,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -391,6 +349,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BA20353725EBA15300C602D8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BA20353825EBA15300C602D8 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA20353725EBA15300C602D8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BAEA45D125A42E5E002BCAF1 /* Project object */;
 }
