@@ -50,6 +50,7 @@ struct Light_WakeupApp: App {
             }
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+            .accessibilityIdentifier("ViewSelections")
         }
         .onChange(of: ScenePhase) { phase in
             // make sure all code is executed
@@ -65,7 +66,7 @@ struct Light_WakeupApp: App {
             if phase == .background {
                 
                 // set alarm if needed
-                if InputView().NotificationToggle == true {
+                if InputView().NotificationToggleBool == true {
                     // use background task to refresh notifications
                     Notification_schedule()
                 }

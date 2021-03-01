@@ -28,6 +28,36 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BACF8F5325ECC14F00C2B8C9"
+               BuildableName = "Light WakeupUITests.xctest"
+               BlueprintName = "Light WakeupUITests"
+               ReferencedContainer = "container:Light Wakeup.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BA30B05925ECB7480067A304"
+               BuildableName = "Light WakeupTests.xctest"
+               BlueprintName = "Light WakeupTests"
+               ReferencedContainer = "container:Light Wakeup.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BACF8F6625ECC22600C2B8C9"
+               BuildableName = "LightWakeupUITests.xctest"
+               BlueprintName = "LightWakeupUITests"
+               ReferencedContainer = "container:Light Wakeup.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

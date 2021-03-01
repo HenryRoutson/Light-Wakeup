@@ -10,16 +10,30 @@
 		BA20353925EBA15300C602D8 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = BA20353825EBA15300C602D8 /* FirebaseMessaging */; };
 		BA5CBD0E25C4F2B300E7235D /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CBD0D25C4F2B300E7235D /* SetupView.swift */; };
 		BACACFEA25E8F80B0029E776 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BACACFE925E8F80B0029E776 /* GoogleService-Info.plist */; };
+		BACF8F9025ECC26E00C2B8C9 /* Light_WakeupUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACF8F8F25ECC26E00C2B8C9 /* Light_WakeupUITests.swift */; };
 		BAEA45DD25A42E5E002BCAF1 /* Light_WakeupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEA45DC25A42E5E002BCAF1 /* Light_WakeupApp.swift */; };
 		BAEA45DF25A42E5E002BCAF1 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEA45DE25A42E5E002BCAF1 /* InputView.swift */; };
 		BAEA45E125A42E61002BCAF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAEA45E025A42E61002BCAF1 /* Assets.xcassets */; };
 		BAEA45E425A42E61002BCAF1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAEA45E325A42E61002BCAF1 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BACF8F9225ECC26E00C2B8C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BAEA45D125A42E5E002BCAF1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BAEA45D825A42E5E002BCAF1;
+			remoteInfo = "Light Wakeup";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		BA5CBD0D25C4F2B300E7235D /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
 		BAA5F03B25B904CF001A8CC6 /* Light WakeupRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Light WakeupRelease.entitlements"; sourceTree = "<group>"; };
 		BACACFE925E8F80B0029E776 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BACF8F8D25ECC26E00C2B8C9 /* Light WakeupUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Light WakeupUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BACF8F8F25ECC26E00C2B8C9 /* Light_WakeupUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light_WakeupUITests.swift; sourceTree = "<group>"; };
+		BACF8F9125ECC26E00C2B8C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAEA45D925A42E5E002BCAF1 /* Light Wakeup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Light Wakeup.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAEA45DC25A42E5E002BCAF1 /* Light_WakeupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light_WakeupApp.swift; sourceTree = "<group>"; };
 		BAEA45DE25A42E5E002BCAF1 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -29,6 +43,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BACF8F8A25ECC26E00C2B8C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BAEA45D625A42E5E002BCAF1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -40,10 +61,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BACF8F8E25ECC26E00C2B8C9 /* Light WakeupUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BACF8F8F25ECC26E00C2B8C9 /* Light_WakeupUITests.swift */,
+				BACF8F9125ECC26E00C2B8C9 /* Info.plist */,
+			);
+			path = "Light WakeupUITests";
+			sourceTree = "<group>";
+		};
 		BAEA45D025A42E5E002BCAF1 = {
 			isa = PBXGroup;
 			children = (
 				BAEA45DB25A42E5E002BCAF1 /* Light Wakeup */,
+				BACF8F8E25ECC26E00C2B8C9 /* Light WakeupUITests */,
 				BAEA45DA25A42E5E002BCAF1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				BAEA45D925A42E5E002BCAF1 /* Light Wakeup.app */,
+				BACF8F8D25ECC26E00C2B8C9 /* Light WakeupUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +114,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BACF8F8C25ECC26E00C2B8C9 /* Light WakeupUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BACF8F9425ECC26E00C2B8C9 /* Build configuration list for PBXNativeTarget "Light WakeupUITests" */;
+			buildPhases = (
+				BACF8F8925ECC26E00C2B8C9 /* Sources */,
+				BACF8F8A25ECC26E00C2B8C9 /* Frameworks */,
+				BACF8F8B25ECC26E00C2B8C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BACF8F9325ECC26E00C2B8C9 /* PBXTargetDependency */,
+			);
+			name = "Light WakeupUITests";
+			productName = "Light WakeupUITests";
+			productReference = BACF8F8D25ECC26E00C2B8C9 /* Light WakeupUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		BAEA45D825A42E5E002BCAF1 /* Light Wakeup */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BAEA45E825A42E61002BCAF1 /* Build configuration list for PBXNativeTarget "Light Wakeup" */;
@@ -108,9 +158,13 @@
 		BAEA45D125A42E5E002BCAF1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1230;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
+					BACF8F8C25ECC26E00C2B8C9 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = BAEA45D825A42E5E002BCAF1;
+					};
 					BAEA45D825A42E5E002BCAF1 = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -133,11 +187,19 @@
 			projectRoot = "";
 			targets = (
 				BAEA45D825A42E5E002BCAF1 /* Light Wakeup */,
+				BACF8F8C25ECC26E00C2B8C9 /* Light WakeupUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BACF8F8B25ECC26E00C2B8C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BAEA45D725A42E5E002BCAF1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -151,6 +213,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BACF8F8925ECC26E00C2B8C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BACF8F9025ECC26E00C2B8C9 /* Light_WakeupUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BAEA45D525A42E5E002BCAF1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -163,7 +233,53 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		BACF8F9325ECC26E00C2B8C9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BAEA45D825A42E5E002BCAF1 /* Light Wakeup */;
+			targetProxy = BACF8F9225ECC26E00C2B8C9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		BACF8F9525ECC26E00C2B8C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Light WakeupUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "HenryRoutson.Light-WakeupUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Light Wakeup";
+			};
+			name = Debug;
+		};
+		BACF8F9625ECC26E00C2B8C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Light WakeupUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "HenryRoutson.Light-WakeupUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Light Wakeup";
+			};
+			name = Release;
+		};
 		BAEA45E625A42E61002BCAF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -332,6 +448,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BACF8F9425ECC26E00C2B8C9 /* Build configuration list for PBXNativeTarget "Light WakeupUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BACF8F9525ECC26E00C2B8C9 /* Debug */,
+				BACF8F9625ECC26E00C2B8C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BAEA45D425A42E5E002BCAF1 /* Build configuration list for PBXProject "Light Wakeup" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
