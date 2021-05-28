@@ -1,0 +1,401 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BA39237526044272009695E4 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = BA39237426044272009695E4 /* FirebaseFunctions */; };
+		BA5CBD0E25C4F2B300E7235D /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CBD0D25C4F2B300E7235D /* SetupView.swift */; };
+		BAE7ABA02609558C00A64B88 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAE7AB9F2609558C00A64B88 /* GoogleService-Info.plist */; };
+		BAEA45DD25A42E5E002BCAF1 /* Light_WakeupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEA45DC25A42E5E002BCAF1 /* Light_WakeupApp.swift */; };
+		BAEA45DF25A42E5E002BCAF1 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEA45DE25A42E5E002BCAF1 /* InputView.swift */; };
+		BAEA45E125A42E61002BCAF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAEA45E025A42E61002BCAF1 /* Assets.xcassets */; };
+		BAEA45E425A42E61002BCAF1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAEA45E325A42E61002BCAF1 /* Preview Assets.xcassets */; };
+		BAF846252609B14300DDA3F0 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = BAF846242609B14300DDA3F0 /* FirebaseMessaging */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BA5CBD0D25C4F2B300E7235D /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
+		BAA5F03B25B904CF001A8CC6 /* Light WakeupRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Light WakeupRelease.entitlements"; sourceTree = "<group>"; };
+		BACF8F9125ECC26E00C2B8C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BAE7AB9F2609558C00A64B88 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BAEA45D925A42E5E002BCAF1 /* Light Wakeup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Light Wakeup.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAEA45DC25A42E5E002BCAF1 /* Light_WakeupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light_WakeupApp.swift; sourceTree = "<group>"; };
+		BAEA45DE25A42E5E002BCAF1 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		BAEA45E025A42E61002BCAF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BAEA45E325A42E61002BCAF1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BAEA45E525A42E61002BCAF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BAEA45D625A42E5E002BCAF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BAF846252609B14300DDA3F0 /* FirebaseMessaging in Frameworks */,
+				BA39237526044272009695E4 /* FirebaseFunctions in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BACF8F8E25ECC26E00C2B8C9 /* Light WakeupUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BACF8F9125ECC26E00C2B8C9 /* Info.plist */,
+			);
+			path = "Light WakeupUITests";
+			sourceTree = "<group>";
+		};
+		BAEA45D025A42E5E002BCAF1 = {
+			isa = PBXGroup;
+			children = (
+				BAEA45DB25A42E5E002BCAF1 /* Light Wakeup */,
+				BACF8F8E25ECC26E00C2B8C9 /* Light WakeupUITests */,
+				BAEA45DA25A42E5E002BCAF1 /* Products */,
+				BAF846232609B14300DDA3F0 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		BAEA45DA25A42E5E002BCAF1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BAEA45D925A42E5E002BCAF1 /* Light Wakeup.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BAEA45DB25A42E5E002BCAF1 /* Light Wakeup */ = {
+			isa = PBXGroup;
+			children = (
+				BAA5F03B25B904CF001A8CC6 /* Light WakeupRelease.entitlements */,
+				BAEA45DC25A42E5E002BCAF1 /* Light_WakeupApp.swift */,
+				BA5CBD0D25C4F2B300E7235D /* SetupView.swift */,
+				BAEA45DE25A42E5E002BCAF1 /* InputView.swift */,
+				BAEA45E025A42E61002BCAF1 /* Assets.xcassets */,
+				BAEA45E525A42E61002BCAF1 /* Info.plist */,
+				BAE7AB9F2609558C00A64B88 /* GoogleService-Info.plist */,
+				BAEA45E225A42E61002BCAF1 /* Preview Content */,
+			);
+			path = "Light Wakeup";
+			sourceTree = "<group>";
+		};
+		BAEA45E225A42E61002BCAF1 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				BAEA45E325A42E61002BCAF1 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BAF846232609B14300DDA3F0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BAEA45D825A42E5E002BCAF1 /* Light Wakeup */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BAEA45E825A42E61002BCAF1 /* Build configuration list for PBXNativeTarget "Light Wakeup" */;
+			buildPhases = (
+				BAEA45D525A42E5E002BCAF1 /* Sources */,
+				BAEA45D625A42E5E002BCAF1 /* Frameworks */,
+				BAEA45D725A42E5E002BCAF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Light Wakeup";
+			packageProductDependencies = (
+				BA39237426044272009695E4 /* FirebaseFunctions */,
+				BAF846242609B14300DDA3F0 /* FirebaseMessaging */,
+			);
+			productName = "Light Wakeup";
+			productReference = BAEA45D925A42E5E002BCAF1 /* Light Wakeup.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BAEA45D125A42E5E002BCAF1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1230;
+				TargetAttributes = {
+					BAEA45D825A42E5E002BCAF1 = {
+						CreatedOnToolsVersion = 12.3;
+					};
+				};
+			};
+			buildConfigurationList = BAEA45D425A42E5E002BCAF1 /* Build configuration list for PBXProject "Light Wakeup" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BAEA45D025A42E5E002BCAF1;
+			packageReferences = (
+				BA39236F26044272009695E4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			productRefGroup = BAEA45DA25A42E5E002BCAF1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BAEA45D825A42E5E002BCAF1 /* Light Wakeup */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BAEA45D725A42E5E002BCAF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BAEA45E425A42E61002BCAF1 /* Preview Assets.xcassets in Resources */,
+				BAEA45E125A42E61002BCAF1 /* Assets.xcassets in Resources */,
+				BAE7ABA02609558C00A64B88 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BAEA45D525A42E5E002BCAF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BAEA45DF25A42E5E002BCAF1 /* InputView.swift in Sources */,
+				BAEA45DD25A42E5E002BCAF1 /* Light_WakeupApp.swift in Sources */,
+				BA5CBD0E25C4F2B300E7235D /* SetupView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		BAEA45E625A42E61002BCAF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BAEA45E725A42E61002BCAF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BAEA45E925A42E61002BCAF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Light Wakeup/Preview Content\"";
+				DEVELOPMENT_TEAM = RJ2ZRVS25U;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Light Wakeup/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "HenryRoutson.Light-Wakeup";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BAEA45EA25A42E61002BCAF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Light Wakeup/Light WakeupRelease.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Light Wakeup/Preview Content\"";
+				DEVELOPMENT_TEAM = RJ2ZRVS25U;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Light Wakeup/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "HenryRoutson.Light-Wakeup";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BAEA45D425A42E5E002BCAF1 /* Build configuration list for PBXProject "Light Wakeup" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BAEA45E625A42E61002BCAF1 /* Debug */,
+				BAEA45E725A42E61002BCAF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BAEA45E825A42E61002BCAF1 /* Build configuration list for PBXNativeTarget "Light Wakeup" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BAEA45E925A42E61002BCAF1 /* Debug */,
+				BAEA45EA25A42E61002BCAF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BA39236F26044272009695E4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.8.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BA39237426044272009695E4 /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA39236F26044272009695E4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		BAF846242609B14300DDA3F0 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA39236F26044272009695E4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = BAEA45D125A42E5E002BCAF1 /* Project object */;
+}
